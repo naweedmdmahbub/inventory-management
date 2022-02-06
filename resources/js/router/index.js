@@ -13,7 +13,7 @@ Vue.use(Router);
 import Layout from '@/layout';
 
 /* Router for modules */
-// import inventoryRoutes from './modules/inventory';
+import inventoryRoutes from './modules/inventory';
 import adminRoutes from './modules/admin';
 import permissionRoutes from './modules/permission';
 
@@ -104,7 +104,7 @@ export const constantRoutes = [
 export const asyncRoutes = [
   permissionRoutes,
   adminRoutes,
-  // inventoryRoutes,
+  inventoryRoutes,
   {
     path: '/pdf',
     component: Layout,
