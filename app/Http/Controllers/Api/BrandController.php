@@ -10,7 +10,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Validator;
 
 class BrandController extends Controller
 {
@@ -43,27 +42,20 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BrandStoreUpdateRequest $request)
     {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'name' => ['required'],
-                'code' => ['required'],
-            ]
-        );
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 403);
-        } else {
-            $params = $request->all();
-            $brand = Brand::create([
-                'name' => $params['name'],
-                'code' => $params['code'],
-                'description' => $params['description'],
-            ]);
+        try {
+            $input = $request->only('name', 'code', 'description');
+            DB::beginTransaction();
+            $brand = Brand::create($input);
+            DB::commit();
+            return new BrandResource($brand);
+        } catch (Exception $ex) {
+            DB::rollBack();
+            // return response()->json->withErrors(new \Illuminate\Support\MessageBag());
+            // return response()->json(new \Illuminate\Support\MessageBag());
+            return response()->json( new \Illuminate\Support\MessageBag(['catch_exception'=>$ex->getMessage()]), 403);
         }
-        return new BrandResource($brand);
-
     }
 
     /**

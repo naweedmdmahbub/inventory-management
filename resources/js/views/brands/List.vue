@@ -13,6 +13,19 @@
       </el-button>
     </div>
 
+    <!-- <div class="row">
+      <div class="col">
+        <div v-if="errors_exist" class="alert alert-danger" role="alert">
+          Whoops! Something didn't work.
+          <ul>
+            <div v-for="(error, key) in errors" :key="key">
+              <li>{{ key }} : {{ error[0] }}</li>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div> -->
+
     <el-table v-loading="loading" :data="list" border fit highlight-current-row>
       <el-table-column align="center" label="ID" width="80">
         <template slot-scope="scope">
@@ -40,7 +53,7 @@
     </el-table>
 
 
-    
+
     <el-dialog :title="'Create new Brand'" :visible.sync="brandFormVisible">
       <div class="form-container">
         <el-form ref="brandForm" :model="currentBrand" label-position="left" label-width="150px" style="max-width: 500px;">
@@ -58,7 +71,7 @@
           <el-button @click="brandFormVisible = false">
             Cancel
           </el-button>
-          <el-button type="primary" @click="handleSubmit()">
+          <el-button type="primary" @click="handleSubmit">
             Confirm
           </el-button>
         </div>
@@ -96,6 +109,7 @@ export default {
         keyword: '',
       },
       errors: [],
+      // errors_exist: false,
     };
   },
   async mounted() {
@@ -105,7 +119,7 @@ export default {
   methods: {
     async getList() {
       this.loading = true;
-      console.log('loading:', this.loading , this.query);
+      console.log('loading:', this.loading, this.query);
       const { data } = await brandResource.list(this.query);
       console.log('getList:', data);
       this.list = data;
@@ -126,6 +140,7 @@ export default {
 
 
     handleSubmit() {
+      // this.errors_exist = false;
       if (this.currentBrand.id !== undefined) {
         brandResource.update(this.currentBrand.id, this.currentBrand).then(response => {
           this.$message({
@@ -157,7 +172,21 @@ export default {
             this.getList();
           })
           .catch(error => {
-            console.log(error);
+            // this.errors_exist = true;
+            this.errors = error.response.data.errors;
+            var offset = 0;
+            Object.entries(this.errors).forEach(([key, value]) => {
+              // console.log('entries: ',key, value);
+              console.log('entries: ', value[0]);
+              this.$notify.error({
+                title: 'Error',
+                message: value[0],
+                offset: offset,
+              });
+              offset += 60;
+            });
+
+            console.log('Error:', this.errors);
           });
       }
     },
