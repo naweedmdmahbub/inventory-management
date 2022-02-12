@@ -26,14 +26,13 @@ class BrandController extends Controller
         $searchParams = $request->all();
         $brandQuery = Brand::query();
         $limit = Arr::get($searchParams, 'limit', static::ITEM_PER_PAGE);
-        // $keyword = Arr::get($searchParams, 'keyword', '');
+        $keyword = Arr::get($searchParams, 'keyword', '');
 
-        // if (!empty($keyword)) {
-        //     $brandQuery->where('name', 'LIKE', '%' . $keyword . '%');
-        // }
+        if (!empty($keyword)) {
+            $brandQuery->where('name', 'LIKE', '%' . $keyword . '%');
+        }
 
-        // return BrandResource::collection($brandQuery->paginate($limit));
-        return BrandResource::collection(Brand::all());
+        return BrandResource::collection($brandQuery->orderBy('id', 'asc')->paginate($limit));
     }
 
     /**
@@ -52,8 +51,6 @@ class BrandController extends Controller
             return new BrandResource($brand);
         } catch (Exception $ex) {
             DB::rollBack();
-            // return response()->json->withErrors(new \Illuminate\Support\MessageBag());
-            // return response()->json(new \Illuminate\Support\MessageBag());
             return response()->json( new \Illuminate\Support\MessageBag(['catch_exception'=>$ex->getMessage()]), 403);
         }
     }
@@ -76,9 +73,22 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BrandStoreUpdateRequest $request, $id)
     {
-        //
+        // dd($request->all(),$id);
+        try {
+            $input = $request->only('name', 'code', 'description');
+            $brand = Brand::find($id);
+            $brand->name = $input->name;
+            $brand->code = $input->code;
+            $brand->description = $input->description;
+            DB::beginTransaction();
+            DB::commit();
+            return new BrandResource($brand);
+        } catch (Exception $ex) {
+            DB::rollBack();
+            return response()->json( new \Illuminate\Support\MessageBag(['catch_exception'=>$ex->getMessage()]), 403);
+        }
     }
 
     /**

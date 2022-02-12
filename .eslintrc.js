@@ -74,9 +74,9 @@ module.exports = {
     }],
     'no-lone-blocks': 2,
     'no-multi-spaces': 2,
-    'no-multiple-empty-lines': [2, {
-      'max': 1
-    }],
+    // 'no-multiple-empty-lines': [2, {
+    //   'max': 1
+    // }],
     'no-native-reassign': 2,
     'no-negated-in-lhs': 2,
     'no-new-object': 2,
@@ -90,7 +90,7 @@ module.exports = {
     'no-sequences': 2,
     'no-spaced-func': 2,
     'no-throw-literal': 2,
-    'no-trailing-spaces': 2,
+    // 'no-trailing-spaces': 2,
     'no-undef-init': 2,
     'no-unmodified-loop-condition': 2,
     'no-unneeded-ternary': [2, {
@@ -114,7 +114,7 @@ module.exports = {
         ':': 'before'
       }
     }],
-    'padded-blocks': [2, 'never'],
+    // 'padded-blocks': [2, 'never'],
     'quotes': [2, 'single', {
       'avoidEscape': true,
       'allowTemplateLiterals': true
