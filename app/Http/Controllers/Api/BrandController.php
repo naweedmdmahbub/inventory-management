@@ -75,14 +75,16 @@ class BrandController extends Controller
      */
     public function update(BrandStoreUpdateRequest $request, $id)
     {
-        // dd($request->all(),$id);
         try {
             $input = $request->only('name', 'code', 'description');
             $brand = Brand::find($id);
-            $brand->name = $input->name;
-            $brand->code = $input->code;
-            $brand->description = $input->description;
+            // dd($request->all(), $input, $id, $brand);
+            // $brand->name = $input['name'];
+            // $brand->code = $input['code'];
+            // $brand->description = $input['description'];
             DB::beginTransaction();
+            $brand->fill($input)->update();
+            // $brand->save();
             DB::commit();
             return new BrandResource($brand);
         } catch (Exception $ex) {
@@ -99,6 +101,18 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // if (!auth()->user()->can('brands.delete')) {
+        //     abort(403, 'Unauthorized action.');
+        // }
+
+        // dd('hi',$id);
+        
+        try {
+            $brand = Brand::find($id);
+            $brand->delete();
+            return response()->json(null, 204);
+        } catch (\Exception $ex) {
+            response()->json(['error' => $ex->getMessage()], 403);
+        }
     }
 }

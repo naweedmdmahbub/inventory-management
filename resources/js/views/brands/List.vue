@@ -33,19 +33,19 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="name" align="center" label="Name" width="200">
+      <el-table-column prop="name" align="center" sortable label="Name" width="200">
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column prop="code" align="center" label="Code" width="200">
+      <el-table-column prop="code" align="center" sortable label="Code" width="200">
         <template slot-scope="scope">
           <span>{{ scope.row.code }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="Description">
+      <el-table-column prop="description" align="center" sortable label="Description">
         <template slot-scope="scope">
           <span>{{ scope.row.description }}</span>
         </template>
@@ -195,19 +195,34 @@ export default {
 
     handleSubmit() {
       // this.errors_exist = false;
+      this.errors = [];
+      var offset = 0;
       if (this.currentBrand.id !== undefined) {
-        brandResource.update(this.currentBrand.id, this.currentBrand).then(response => {
-          this.$message({
-            type: 'success',
-            message: 'Brand info has been updated successfully',
-            duration: 5 * 1000,
+        axios
+          .put('api/brands/'+this.currentBrand.id, this.currentBrand)
+          .then(response => {
+            this.$message({
+              type: 'success',
+              message: 'Brand info has been updated successfully',
+              duration: 5 * 1000,
+            });
+            this.getList();
+          })
+          .catch(error => {
+            this.errors = error.response.data.errors;
+            Object.entries(this.errors).forEach(([key, value]) => {
+              this.$notify.error({
+                title: 'Error',
+                message: value[0],
+                offset: offset,
+              });
+              offset += 60;
+            });
+            this.getList();
+          })
+          .finally(() => {
+            this.brandFormVisible = false;
           });
-          this.getList();
-        }).catch(error => {
-          console.log(error);
-        }).finally(() => {
-          this.brandFormVisible = false;
-        });
       } else {
         axios
           .post('api/brands', this.currentBrand)
@@ -276,13 +291,37 @@ export default {
   
       }
     },
+    handleDelete(id, name) {
+      this.$confirm('This will permanently delete brand ' + name + '. Continue?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      }).then(() => {
+        axios
+          .delete('api/brands/'+id)
+          .then(response => {
+            this.$message({
+              type: 'success',
+              message: 'Delete completed',
+            });
+            this.getList();
+          }).catch(error => {
+            console.log(error);
+          });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: 'Delete canceled',
+        });
+      });
+    },
 
 
     handleDownload() {
       this.downloading = true;
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['id', 'name', 'code', 'descirption'];
-        const filterVal = ['id', 'name', 'code', 'descirption'];
+        const tHeader = ['id', 'name', 'code', 'description'];
+        const filterVal = ['id', 'name', 'code', 'description'];
         const data = this.formatJson(filterVal, this.list);
         excel.export_json_to_excel({
           header: tHeader,
