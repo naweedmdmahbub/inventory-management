@@ -24,6 +24,16 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <style>
+        .el-input.is-disabled .el-input__inner {
+            color: #000 !important;
+            cursor: not-allowed;
+        }
+        .el-textarea.is-disabled .el-textarea__inner {
+            color: #000 !important;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
     <div id="app">

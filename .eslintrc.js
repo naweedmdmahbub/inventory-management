@@ -23,12 +23,12 @@ module.exports = {
     'camelcase': [0, {
       'properties': 'always'
     }],
-    'comma-dangle': ['error', {
-      'functions': 'never',
-      'objects': 'always-multiline',
-      'arrays': 'always-multiline',
-      'imports': 'always-multiline',
-    }],
+    // 'comma-dangle': ['error', {
+    //   'functions': 'never',
+    //   'objects': 'always-multiline',
+    //   'arrays': 'always-multiline',
+    //   'imports': 'always-multiline',
+    // }],
     'comma-spacing': [2, {
       'before': false,
       'after': true
@@ -36,7 +36,7 @@ module.exports = {
     'comma-style': ['error', 'last'],
     'curly': [2, 'all'],
     'dot-location': [2, 'property'],
-    'eol-last': 2,
+    // 'eol-last': 2,
     'eqeqeq': ["error", "always", {"null": "ignore"}],
     'handle-callback-err': [2, '^(err|error)$'],
     'indent': [2, 2, {
@@ -119,7 +119,7 @@ module.exports = {
       'avoidEscape': true,
       'allowTemplateLiterals': true
     }],
-    'semi': ['error', 'always'],
+    // 'semi': ['error', 'always'],
     'semi-spacing': [2, {
       'before': false,
       'after': true
@@ -139,13 +139,13 @@ module.exports = {
     'yield-star-spacing': [2, 'both'],
     'yoda': [2, 'never'],
     'prefer-const': 2,
-    'vue/max-attributes-per-line': [2, {
-      'singleline': 10,
-      'multiline': {
-        'max': 1,
-        'allowFirstLine': false,
-      },
-    }],
+    // 'vue/max-attributes-per-line': [2, {
+    //   'singleline': 10,
+    //   'multiline': {
+    //     'max': 1,
+    //     'allowFirstLine': false,
+    //   },
+    // }],
     'vue/name-property-casing': ['error', 'PascalCase'],
     'vue/no-v-html': 'off',
     'vue/multiline-html-element-content-newline': 'off',
