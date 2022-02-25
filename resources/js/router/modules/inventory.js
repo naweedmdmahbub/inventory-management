@@ -41,6 +41,14 @@ const excelRoutes = {
       name: 'BrandList',
       meta: { title: 'Brands', icon: 'list', permissions: ['view brand list'] },
     },
+
+    /** Unit */
+    {
+      path: 'units',
+      component: () => import('@/views/units/List'),
+      name: 'UnitList',
+      meta: { title: 'Units', icon: 'list', permissions: ['view unit list'] },
+    },
   ],
 };
 
