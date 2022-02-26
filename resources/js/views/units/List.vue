@@ -182,7 +182,6 @@ export default {
       this.currentUnit = {
         name: '',
         code: '',
-        description: '',
       };
     },
     handleEditForm(id) {
@@ -234,7 +233,6 @@ export default {
             this.currentUnit = {
               name: '',
               code: '',
-              description: '',
             };
             this.unitFormVisible = false;
             this.getList();
@@ -267,7 +265,6 @@ export default {
         //     this.currentUnit = {
         //       name: '',
         //       code: '',
-        //       description: '',
         //     };
         //     this.unitFormVisible = false;
         //     this.getList();
@@ -319,9 +316,10 @@ export default {
     handleDownload() {
       this.downloading = true;
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['id', 'name', 'code', 'description'];
-        const filterVal = ['id', 'name', 'code', 'description'];
+        const tHeader = ['ID', 'Name', 'Code', 'Status'];
+        const filterVal = ['id', 'name', 'code', 'status'];
         const data = this.formatJson(filterVal, this.list);
+        console.log(data);
         excel.export_json_to_excel({
           header: tHeader,
           data,
@@ -331,7 +329,28 @@ export default {
       });
     },
     formatJson(filterVal, jsonData) {
-      return jsonData.map(v => filterVal.map(j => v[j]));
+      // return jsonData.map(v => filterVal.map(j => v[j]));
+      // console.log(filterVal, jsonData);
+      // return jsonData.map(v => filterVal.map(j => {
+      //   console.log(v, j, v[j]);
+      //   return v[j];
+      // }));
+
+      const data = jsonData.map(item => {
+          const container = [];
+          container.push(item.id,  item.name,  item.code);
+          item.status = 1 ? container.push('Active') : container.push('Inactive');
+          return container;
+      });
+      return data;
+      // return jsonData.map((v, ind) => {
+      //   // v.ind = v[ind];
+      //   //  v.name = v.name;
+      //   // v.code = v.code;
+      //   // v.status = v.status = 1 ? 'Active' : 'Inactive';
+      //   console.log(v, ind, v.ind);
+      //   return v;
+      // });
     },
   },
 };
