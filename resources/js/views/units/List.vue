@@ -1,14 +1,40 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="query.keyword" :placeholder="$t('table.keyword')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+      <el-input
+        v-model="query.keyword"
+        :placeholder="$t('table.keyword')"
+        style="width: 200px;"
+        class="filter-item"
+        @keyup.enter.native="handleFilter"
+      />
+      <el-button
+        v-waves
+        class="filter-item"
+        type="primary"
+        icon="el-icon-search"
+        @click="handleFilter"
+      >
         {{ $t('table.search') }}
       </el-button>
-      <el-button v-permission="['add unit']" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-plus" @click="handleCreate">
+      <el-button
+        v-permission="['add unit']"
+        class="filter-item"
+        style="margin-left: 10px;"
+        type="primary"
+        icon="el-icon-plus"
+        @click="handleCreate"
+      >
         {{ $t('table.add') }}
       </el-button>
-      <el-button v-waves :loading="downloading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
+      <el-button
+        v-waves
+        :loading="downloading"
+        class="filter-item"
+        type="primary"
+        icon="el-icon-download"
+        @click="handleDownload"
+      >
         {{ $t('table.export') }}
       </el-button>
     </div>
@@ -26,25 +52,51 @@
       </div>
     </div> -->
 
-    <el-table v-loading="loading" :data="list" border fit highlight-current-row>
-      <el-table-column align="center" label="ID" width="80">
+    <el-table
+      v-loading="loading"
+      :data="list"
+      border
+      fit
+      highlight-current-row
+    >
+      <el-table-column
+        align="center"
+        label="ID"
+        width="80"
+      >
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column prop="name" align="center" sortable label="Name" width="200">
+      <el-table-column
+        prop="name"
+        align="center"
+        sortable
+        label="Name"
+        width="200"
+      >
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column prop="code" align="center" sortable label="Code">
+      <el-table-column
+        prop="code"
+        align="center"
+        sortable
+        label="Code"
+      >
         <template slot-scope="scope">
           <span>{{ scope.row.code }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="status" align="center" sortable label="Status">
+      <el-table-column
+        prop="status"
+        align="center"
+        sortable
+        label="Status"
+      >
         <template slot-scope="scope">
           <span v-if="scope.row.status == 1">Active</span>
           <span v-else>Inactive</span>
@@ -52,15 +104,37 @@
       </el-table-column>
       
       
-      <el-table-column align="center" label="Actions" width="350">
+      <el-table-column
+        align="center"
+        label="Actions"
+        width="350"
+      >
         <template slot-scope="scope">
-          <el-button v-permission="['view unit']" type="warning" size="small" icon="el-icon-view" @click="handleEditForm(scope.row.id, scope.row.name);">
+          <el-button
+            v-permission="['view unit']"
+            type="warning"
+            size="small"
+            icon="el-icon-view"
+            @click="handleEditForm(scope.row.id, scope.row.name);"
+          >
             View
           </el-button>
-          <el-button v-permission="['update unit']" type="primary" size="small" icon="el-icon-edit" @click="handleEditForm(scope.row.id, scope.row.name);">
+          <el-button
+            v-permission="['update unit']"
+            type="primary"
+            size="small"
+            icon="el-icon-edit"
+            @click="handleEditForm(scope.row.id, scope.row.name);"
+          >
             Edit
           </el-button>
-          <el-button v-permission="['manage unit']" type="danger" size="small" icon="el-icon-delete" @click="handleDelete(scope.row.id, scope.row.name);">
+          <el-button
+            v-permission="['manage unit']"
+            type="danger"
+            size="small"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row.id, scope.row.name);"
+          >
             Delete
           </el-button>
         </template>
@@ -71,21 +145,42 @@
 
     
 
-    <el-dialog :title="formTitle" :visible.sync="unitFormVisible">
+    <el-dialog
+      :title="formTitle"
+      :visible.sync="unitFormVisible"
+    >
       <div class="form-container">
-        <el-form ref="unitForm" :model="currentUnit" label-position="left" label-width="150px" style="max-width: 500px;">
-          <el-form-item label="Name" prop="name">
+        <el-form
+          ref="unitForm"
+          :model="currentUnit"
+          label-position="left"
+          label-width="150px"
+          style="max-width: 500px;"
+        >
+          <el-form-item
+            label="Name"
+            prop="name"
+          >
             <el-input v-model="currentUnit.name" />
           </el-form-item>
-          <el-form-item label="Code" prop="code">
+          <el-form-item
+            label="Code"
+            prop="code"
+          >
             <el-input v-model="currentUnit.code" />
           </el-form-item>
         </el-form>
-        <div slot="footer" class="dialog-footer">
+        <div
+          slot="footer"
+          class="dialog-footer"
+        >
           <el-button @click="unitFormVisible = false">
             Cancel
           </el-button>
-          <el-button type="primary" @click="handleSubmit">
+          <el-button
+            type="primary"
+            @click="handleSubmit"
+          >
             Confirm
           </el-button>
         </div>
@@ -337,20 +432,16 @@ export default {
       // }));
 
       const data = jsonData.map(item => {
-          const container = [];
-          container.push(item.id,  item.name,  item.code);
-          item.status = 1 ? container.push('Active') : container.push('Inactive');
-          return container;
+        const container = [];
+        container.push(item.id, item.name, item.code);
+        if (item.status === 1){
+          container.push('Active');
+        } else {
+          container.push('Inactive')
+        }
+        return container;
       });
       return data;
-      // return jsonData.map((v, ind) => {
-      //   // v.ind = v[ind];
-      //   //  v.name = v.name;
-      //   // v.code = v.code;
-      //   // v.status = v.status = 1 ? 'Active' : 'Inactive';
-      //   console.log(v, ind, v.ind);
-      //   return v;
-      // });
     },
   },
 };
