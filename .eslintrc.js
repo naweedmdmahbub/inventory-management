@@ -139,7 +139,7 @@ module.exports = {
     'yield-star-spacing': [2, 'both'],
     'yoda': [2, 'never'],
     // 'prefer-const': 2,
-    'vue/max-attributes-per-line': [2, {
+    'vue/max-attributes-per-line': [10, {
       'singleline': 10,
       'multiline': {
         'max': 1,
@@ -150,6 +150,7 @@ module.exports = {
     'vue/no-v-html': 'off',
     'vue/multiline-html-element-content-newline': 'off',
     'vue/singleline-html-element-content-newline': 'off',
-    "vue/require-prop-types":0
+    "vue/require-prop-types":0,
+    "vue/html-indent": "off"
   },
 };

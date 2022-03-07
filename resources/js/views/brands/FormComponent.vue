@@ -10,34 +10,32 @@
       <el-form-item label="Name" prop="name">
         <el-input
           v-model="brand.name"
-          :disabled="mood == 'show'"
+          :disabled="mode == 'show'"
         />
       </el-form-item>
       <el-form-item label="Code" prop="code">
         <el-input
           v-model="brand.code"
-          :disabled="mood == 'show'"
+          :disabled="mode == 'show'"
         />
       </el-form-item>
       <el-form-item label="Description" prop="description">
         <el-input
           v-model="brand.description"
           type="textarea"
-          :disabled="mood == 'show'"
+          :disabled="mode == 'show'"
         />
       </el-form-item>
       
       
       <el-form-item label="Image" prop="image">
-        <!-- <img v-bind:src="'/uploads/brands/' + image.filename" />  -->
+        <img v-if="brand.image !==null && brand.image.id"
+            :src="'/uploads/brands/' + brand.image.filename"
+            width="100"
+            height="100"
+        >
         <input type="file" @change="onFileChange">
       </el-form-item>
-
-      <!-- <el-image
-        style="width: 100px; height: 100px"
-        :src="url"
-        :fit="fit">
-      </el-image> -->
     </el-form>
     <div
       slot="footer"
@@ -47,7 +45,7 @@
         Cancel
       </el-button>
       <el-button
-        v-if="mood !== 'show'"
+        v-if="mode !== 'show'"
         type="primary"
         @click="handleSubmit"
       >
@@ -60,12 +58,11 @@
 <script>
 import axios from 'axios';
 export default {
-  props: ['mood', 'brand'],
+  props: ['mode', 'brand'],
   data() {
     return {
       loading: true,
       downloading: false,
-      url: '',
       // url: '/uploads/brands/'+brand.image.filename,
       imageUrl: '',
       errors: [],
@@ -136,8 +133,12 @@ export default {
     },
     
     onFileChange(event){
-        console.log(event.target.files);
         this.brand.image = event.target.files[0];
+        this.imageUrl = URL.createObjectURL(this.brand.image);
+        console.log('onFileChange: ', event.target.files);
+        console.log('this.brand.image: ', this.brand.image);
+        console.log('imageUrl: ', this.imageUrl);
+        // this.imageUrl = event.target.files[0].name;
     },
   }
 };

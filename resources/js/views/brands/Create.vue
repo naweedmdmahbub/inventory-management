@@ -7,7 +7,7 @@
       <form-component
         v-if="isMounted"
         :brand="brand"
-        mood="create"
+        mode="create"
         @dismissDialog="dismissDialog"
       />
     </el-dialog>

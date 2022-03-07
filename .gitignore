@@ -20,5 +20,6 @@ yarn-error.log
 /public/stats.html
 /public/*.js
 /public/*.js.map
+/public/uploads/**
 .idea
 .DS_Store
