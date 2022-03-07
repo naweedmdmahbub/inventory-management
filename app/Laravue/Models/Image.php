@@ -5,15 +5,16 @@ namespace App\Laravue\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class Image extends Model
 {
     use HasFactory;
     protected $guard_name = 'api';
-    protected $fillable = [
-        'name', 'code', 'description',
+    protected $fillable= [
+        'imageable_type', 'imageable_id', 'filename'
     ];
-    public function image()
+
+    public function imageable()
     {
-        return $this->morphOne(Image::class, 'imageable');
+        return $this->morphTo();
     }
 }

@@ -39,9 +39,9 @@ module.exports = {
     // 'eol-last': 2,
     'eqeqeq': ["error", "always", {"null": "ignore"}],
     'handle-callback-err': [2, '^(err|error)$'],
-    'indent': [2, 2, {
-      'SwitchCase': 1
-    }],
+    // 'indent': [2, 2, {
+    //   'SwitchCase': 1
+    // }],
     'jsx-quotes': [2, 'prefer-single'],
     'key-spacing': [2, {
       'beforeColon': false,
@@ -138,17 +138,18 @@ module.exports = {
     'wrap-iife': [2, 'any'],
     'yield-star-spacing': [2, 'both'],
     'yoda': [2, 'never'],
-    'prefer-const': 2,
-    // 'vue/max-attributes-per-line': [2, {
-    //   'singleline': 10,
-    //   'multiline': {
-    //     'max': 1,
-    //     'allowFirstLine': false,
-    //   },
-    // }],
+    // 'prefer-const': 2,
+    'vue/max-attributes-per-line': [2, {
+      'singleline': 10,
+      'multiline': {
+        'max': 1,
+        'allowFirstLine': false,
+      },
+    }],
     'vue/name-property-casing': ['error', 'PascalCase'],
     'vue/no-v-html': 'off',
     'vue/multiline-html-element-content-newline': 'off',
     'vue/singleline-html-element-content-newline': 'off',
+    "vue/require-prop-types":0
   },
 };

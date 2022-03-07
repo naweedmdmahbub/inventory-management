@@ -46,58 +46,42 @@
       fit
       highlight-current-row
     >
-      <el-table-column
-        align="center"
-        label="ID"
-        width="80"
-      >
+      <el-table-column align="center" label="ID" width="80">
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column
-        prop="name"
-        align="center"
-        sortable
-        label="Name"
-        width="200"
-      >
+      <el-table-column prop="name" align="center" sortable label="Name" width="200">
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column
-        prop="code"
-        align="center"
-        sortable
-        label="Code"
-        width="200"
-      >
+      <el-table-column prop="code" align="center" sortable label="Code" width="200">
         <template slot-scope="scope">
           <span>{{ scope.row.code }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column
-        prop="description"
-        align="center"
-        sortable
-        label="Description"
-      >
+      <el-table-column prop="description" align="center" sortable label="Description">
         <template slot-scope="scope">
           <span>{{ scope.row.description }}</span>
         </template>
       </el-table-column>
 
+      <el-table-column prop="image" align="center" sortable label="Image">
+        <template slot-scope="scope">
+          <img
+            v-if="scope.row.image !==null"
+            :src="'/uploads/brands/' + scope.row.image.filename"
+            width="100"
+            height="100"
+          >
+        </template>
+      </el-table-column>
 
-      
-      <el-table-column
-        align="center"
-        label="Actions"
-        width="350"
-      >
+      <el-table-column align="center" label="Actions" width="350">
         <template slot-scope="scope">
           <el-button
             v-permission="['view brand']"
@@ -182,7 +166,12 @@ export default {
       loading: true,
       downloading: false,
       formTitle: 'Create Brand',
-      currentBrand: {},
+      currentBrand: {
+        name: '',
+        code: '',
+        description: '',
+        image: '',
+      },
       query: {
         page: 1,
         limit: 10,
@@ -201,6 +190,7 @@ export default {
         name: '',
         code: '',
         description: '',
+        image: '',
       };
       this.getList();
     },

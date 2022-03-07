@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BrandStoreUpdateRequest;
 use App\Http\Resources\BrandResource;
 use App\Laravue\Models\Brand;
+use App\Traits\ImageTrait;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class BrandController extends Controller
 {
+    use ImageTrait;
     const ITEM_PER_PAGE = 15;
 
     /**
@@ -43,10 +45,18 @@ class BrandController extends Controller
      */
     public function store(BrandStoreUpdateRequest $request)
     {
+        // dd($request->all());
         try {
-            $input = $request->only('name', 'code', 'description');
+            $input = $request->only('name', 'code', 'description', 'image');
             DB::beginTransaction();
             $brand = Brand::create($input);
+            if($request->hasFile('image')){
+                $filename = $request->image->getClientOriginalName();
+                $image_upload_path = public_path('\uploads\brands');
+                $request->image->move($image_upload_path, $filename);
+                $this->createImage($filename,$brand);
+//                dd($request->all(), $request->file(), $request->image, $filename, public_path(), $extension, $image_upload_path);
+            }
             DB::commit();
             return new BrandResource($brand);
         } catch (Exception $ex) {
@@ -78,13 +88,25 @@ class BrandController extends Controller
         try {
             $input = $request->only('name', 'code', 'description');
             $brand = Brand::find($id);
-            // dd($request->all(), $input, $id, $brand);
-            // $brand->name = $input['name'];
-            // $brand->code = $input['code'];
-            // $brand->description = $input['description'];
             DB::beginTransaction();
             $brand->fill($input)->update();
-            // $brand->save();
+            
+            //Only deleting image when new image is selected.
+            // When no new image is selected, image remains the same, that means no delete option for image only.
+            if($request->hasFile('image')){
+                $prev_image =  $brand->image;
+                if($prev_image){
+                    $path = public_path('\uploads\brands\\').$prev_image->filename;
+                    if(file_exists($path)) {
+                        unlink($path);
+                        $prev_image->delete();
+                    }
+                }
+                $filename = $request->image->getClientOriginalName();
+                $image_upload_path = public_path('\uploads\brands');
+                $request->image->move($image_upload_path, $filename);
+                $this->createImage($filename,$brand);
+            }
             DB::commit();
             return new BrandResource($brand);
         } catch (Exception $ex) {
@@ -109,6 +131,14 @@ class BrandController extends Controller
         
         try {
             $brand = Brand::find($id);
+            $image =  $brand->image;
+            if($image){
+                $path = public_path('\uploads\brands\\').$image->filename;
+                if(file_exists($path)) {
+                    unlink($path);
+                    $image->delete();
+                }
+            }
             $brand->delete();
             return response()->json(null, 204);
         } catch (\Exception $ex) {
