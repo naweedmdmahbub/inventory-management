@@ -44,6 +44,7 @@ Route::namespace('Api')->group(function() {
         // Inventory routes
         Route::apiResource('brands', 'BrandController');
         Route::apiResource('units', 'UnitController');
+        Route::apiResource('categories', 'CategoryController');
 
     });
 });
