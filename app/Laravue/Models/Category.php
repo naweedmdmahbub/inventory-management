@@ -16,11 +16,12 @@ class Category extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
     
-    // Activity Logs
+    // Activity Logs begins
     protected static $logAttributes = ['name', 'code'];
     protected static $logOnlyDirty = true;
     public function getDescriptionForEvent(string $eventName): string
     {
         return "Category has been {$eventName}";
     }
+    // Activity Logs ends
 }
