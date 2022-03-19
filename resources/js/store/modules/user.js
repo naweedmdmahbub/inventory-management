@@ -133,8 +133,10 @@ const actions = {
       const accessRoutes = await store.dispatch('permission/generateRoutes', { roles, permissions });
 
       // dynamically add accessible routes
-      router.addRoutes(accessRoutes);
-
+      // router.addRoutes(accessRoutes);
+      accessRoutes.forEach(function(route){
+        router.addRoute(route);
+      })
       resolve();
     });
   },

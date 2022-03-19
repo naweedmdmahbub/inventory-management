@@ -41,6 +41,7 @@ Route::namespace('Api')->group(function() {
         Route::get('roles/{role}/permissions', 'RoleController@permissions')->middleware('permission:' . Acl::PERMISSION_PERMISSION_MANAGE);
 
 
+        Route::apiResource('clients', 'ClientController');
         // Inventory routes
         Route::apiResource('brands', 'BrandController');
         Route::apiResource('units', 'UnitController');

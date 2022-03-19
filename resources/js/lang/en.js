@@ -198,4 +198,13 @@ export default {
       visitor: 'Visitor. Have access to static pages, should not have any writable permission',
     },
   },
+  client: {
+    'first_name': 'First Name',
+    'last_name': 'Last Name',
+    'business_name': 'Business Name',
+    'email': 'Email',
+    'contact_person': 'Contact Person',
+    'contact_no': 'Contact No',
+    'address': 'Address',
+  }
 };
