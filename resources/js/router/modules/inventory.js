@@ -7,7 +7,7 @@ const excelRoutes = {
   redirect: '/inventory/brands',
   name: 'Inventory',
   meta: {
-    title: 'Inventory',
+    title: 'inventory',
     icon: 'nested',
     permissions: ['view menu excel'],
   },
@@ -39,7 +39,7 @@ const excelRoutes = {
       path: 'brands',
       component: () => import('@/views/brands/List'),
       name: 'BrandList',
-      meta: { title: 'Brands', icon: 'list', permissions: ['view brand list'] },
+      meta: { title: 'brands', icon: 'list', permissions: ['view brand list'] },
     },
 
     /** Unit */
@@ -47,14 +47,14 @@ const excelRoutes = {
       path: 'units',
       component: () => import('@/views/units/List'),
       name: 'UnitList',
-      meta: { title: 'Units', icon: 'list', permissions: ['view unit list'] },
+      meta: { title: 'units', icon: 'list', permissions: ['view unit list'] },
     },
     /** Category */
     {
       path: 'categories',
       component: () => import('@/views/categories/List'),
       name: 'CategoryList',
-      meta: { title: 'Categories', icon: 'list', permissions: ['view category list'] },
+      meta: { title: 'categories', icon: 'list', permissions: ['view category list'] },
     },
   ],
 };

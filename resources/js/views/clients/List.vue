@@ -98,10 +98,9 @@
           </el-button>
         </template>
       </el-table-column>
-
     </el-table>
 
-    
+
     <pagination 
       v-show="total>0"
       :total="total"
@@ -140,7 +139,6 @@ export default {
   computed: {
   },
   created() {
-    this.resetNewClient();
     this.getList();
   },
   methods: {
@@ -181,17 +179,11 @@ export default {
         });
       });
     },
-    resetNewClient() {
-      this.newClient = {
-        name: '',
-        email: '',
-      };
-    },
     handleDownload() {
       this.downloading = true;
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['id', 'client_id', 'name', 'email', 'role'];
-        const filterVal = ['index', 'id', 'name', 'email', 'role'];
+        const tHeader = ['SL', 'Client ID', 'Name', 'Business Name', 'Contact Person', 'Contact No', 'Address'];
+        const filterVal = ['index', 'id', 'full_name', 'business_name', 'contact_person', 'contact_no', 'address'];
         const data = this.formatJson(filterVal, this.list);
         excel.export_json_to_excel({
           header: tHeader,

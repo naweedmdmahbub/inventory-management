@@ -55,11 +55,11 @@ export default {
       for (var key in this.client) {
         data.append(key, this.client[key]);
       }
-      console.log('data:', data, this.client);
       if (this.client.id !== undefined) {
         axios
           .put('api/clients/'+this.client.id, this.client)
           .then(response => {
+            this.$router.push('/administrator/clients');
             this.$message({
               type: 'success',
               message: 'Client info has been updated successfully',
@@ -74,6 +74,7 @@ export default {
         axios
           .post('api/clients', data)
           .then(response => {
+            this.$router.push('/administrator/clients');
             this.$message({
               message: 'New client ' + this.client.first_name + ' ' + this.client.last_name + ' has been created successfully.',
               type: 'success',

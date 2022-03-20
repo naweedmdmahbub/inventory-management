@@ -60,22 +60,22 @@ const adminRoutes = {
     {
       path: 'clients/edit/:id',
       component: () => import('@/views/clients/Edit'),
-      name: 'ClientProfile',
-      meta: { title: 'clientProfile', noCache: true, permissions: ['update client'] },
+      name: 'EditClient',
+      meta: { title: 'editClient', noCache: true, permissions: ['update client'] },
       hidden: true,
     },
     {
       path: 'clients/create',
       component: () => import('@/views/clients/Create'),
       name: 'CreateClient',
-      meta: { title: 'CreateClient', noCache: true, permissions: ['add client'] },
+      meta: { title: 'createClient', noCache: true, permissions: ['add client'] },
       hidden: true,
     },
     {
       path: 'clients',
       component: () => import('@/views/clients/List'),
       name: 'ClientList',
-      meta: { title: 'Clients', icon: 'list', permissions: ['view client list'] },
+      meta: { title: 'clients', icon: 'list', permissions: ['view client list'] },
     },
   ],
 };

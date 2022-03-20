@@ -28,7 +28,7 @@ class ClientStoreUpdateRequest extends FormRequest
             'last_name' => 'required',
             'business_name' => 'required',
             'contact_person' => 'required',
-            'email' => 'email',
+            'email' => 'nullable|email',
         ];
     }
 }

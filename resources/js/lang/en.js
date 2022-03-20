@@ -70,6 +70,14 @@ export default {
     administrator: 'Administrator',
     users: 'Users',
     userProfile: 'User Profile',
+    createClient: 'Create Client',
+    editClient: 'Edit Client',
+    clients: 'Clients',
+
+    inventory: 'Inventory',
+    brands: 'Brands',
+    units: 'Units',
+    categories: 'Categories',
   },
   navbar: {
     logOut: 'Log Out',
