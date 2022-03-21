@@ -38,6 +38,7 @@
 
 <script>
 import axios from 'axios';
+import { showErrors } from '@/utils/helper.js'
 export default {
   name: 'ClientForm',
   props: ['client', 'mode'],
@@ -68,7 +69,7 @@ export default {
           })
           .catch(error => {
             console.log('error:', error);
-            this.showErrors(error);
+            showErrors(error);
           });
       } else {
         axios
@@ -82,22 +83,10 @@ export default {
             });
           })
           .catch(error => {
-            this.showErrors(error);
+            showErrors(error);
           });
       }
     },
-    showErrors(error){
-      this.errors = error.response.data.errors;
-      var offset = 0;
-      Object.entries(this.errors).forEach(([key, value]) => {
-        this.$notify.error({
-          title: 'Error',
-          message: value[0],
-          offset: offset,
-        });
-        offset += 60;
-      });
-    }
   }
 }
 </script>
