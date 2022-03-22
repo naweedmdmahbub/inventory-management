@@ -72,6 +72,7 @@ export default {
     userProfile: 'User Profile',
     createClient: 'Create Client',
     editClient: 'Edit Client',
+    viewClient: 'View Client',
     clients: 'Clients',
 
     inventory: 'Inventory',

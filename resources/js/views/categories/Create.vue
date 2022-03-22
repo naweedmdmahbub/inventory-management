@@ -23,7 +23,7 @@ export default {
     return {
       loading: true,
       downloading: false,
-      formTitle: 'Create Brand',
+      formTitle: 'Create Category',
       dialogFormVisible: false,
       isMounted: false,
     };

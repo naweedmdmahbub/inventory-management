@@ -113,19 +113,19 @@
     <!-- Create Modal -->
     <Create
       ref="createRef"
-      :category="currentBrand"
+      :category="currentCategory"
       @dismissDialog="dismissDialog"
     />
     <!-- Edit Modal -->
     <Edit
       ref="editRef"
-      :category="currentBrand"
+      :category="currentCategory"
       @dismissDialog="dismissDialog"
     />
     <!-- Show Modal -->
     <Show
       ref="showRef"
-      :category="currentBrand"
+      :category="currentCategory"
     />
 
     <pagination 
@@ -151,7 +151,7 @@ import Show from './Show';
 const categoryResource = new Resource('categories');
 
 export default {
-  name: 'BrandList',
+  name: 'CategoryList',
   components: { Pagination, Create, Edit, Show },
   directives: { waves, permission },
   data() {
@@ -160,8 +160,8 @@ export default {
       total: 0,
       loading: true,
       downloading: false,
-      formTitle: 'Create Brand',
-      currentBrand: {
+      formTitle: 'Create Category',
+      currentCategory: {
         name: '',
         code: '',
         image: '',
@@ -180,7 +180,7 @@ export default {
   },
   methods: {
     dismissDialog() {
-      this.currentBrand = {
+      this.currentCategory = {
         name: '',
         code: '',
         image: '',
@@ -204,11 +204,11 @@ export default {
       this.$refs.createRef.handleCreateModal();
     },
     handleEdit(id){
-      this.currentBrand = this.list.find(category => category.id === id);
+      this.currentCategory = this.list.find(category => category.id === id);
       this.$refs.editRef.handleEditModal(id);
     },
     handleShow(id){
-      this.currentBrand = this.list.find(category => category.id === id);
+      this.currentCategory = this.list.find(category => category.id === id);
       this.$refs.showRef.handleShowModal(id);
     },
 
