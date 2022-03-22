@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <form-component :client="client" mode="create" />
+    <form-component :client="client" :mode="mode" />
   </div>
 </template>
 

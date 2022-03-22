@@ -69,7 +69,7 @@
 
       <el-table-column align="center" label="Actions" width="350">
         <template slot-scope="scope">
-          <el-button
+          <!-- <el-button
             v-permission="['view client']"
             type="warning"
             size="small"
@@ -77,22 +77,34 @@
             @click="handleShow(scope.row.id);"
           >
             View
-          </el-button>
-          <el-button
-            v-permission="['update client']"
-            type="primary"
-            size="small"
-            icon="el-icon-edit"
-            @click="handleEdit(scope.row.id);"
-          >
-            Edit
-          </el-button>
+          </el-button> -->
+          
+          <router-link :to="'/administrator/clients/view/'+scope.row.id">
+            <el-button
+              v-permission="['view client']"
+              type="warning"
+              size="small"
+              icon="el-icon-view"
+            >
+              View
+            </el-button>
+          </router-link>
+          <router-link :to="'/administrator/clients/edit/'+scope.row.id">
+            <el-button
+              v-permission="['update client']"
+              type="primary"
+              size="small"
+              icon="el-icon-edit"
+            >
+              Edit
+            </el-button>
+          </router-link>
           <el-button
             v-permission="['manage client']"
             type="danger"
             size="small"
             icon="el-icon-delete"
-            @click="handleDelete(scope.row.id, scope.row.name);"
+            @click="handleDelete(scope.row.id, scope.row.full_name);"
           >
             Delete
           </el-button>
@@ -136,10 +148,10 @@ export default {
       newClient: {},
     };
   },
-  computed: {
-  },
-  created() {
-    this.getList();
+  computed: {},
+  async mounted() {
+    console.log('mounted list');
+    await this.getList();
   },
   methods: {
     async getList() {
@@ -150,6 +162,7 @@ export default {
       this.list.forEach((element, index) => {
         element['index'] = (page - 1) * limit + index + 1;
       });
+      console.log('hi getList');
       this.total = meta.total;
       this.loading = false;
     },

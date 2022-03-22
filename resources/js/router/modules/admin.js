@@ -58,6 +58,13 @@ const adminRoutes = {
     
     /** Client managements */
     {
+      path: 'clients/view/:id',
+      component: () => import('@/views/clients/View'),
+      name: 'ViewClient',
+      meta: { title: 'viewClient', noCache: true, permissions: ['view client'] },
+      hidden: true,
+    },
+    {
       path: 'clients/edit/:id',
       component: () => import('@/views/clients/Edit'),
       name: 'EditClient',
