@@ -42,6 +42,8 @@ Route::namespace('Api')->group(function() {
 
 
         Route::apiResource('clients', 'ClientController');
+        Route::apiResource('suppliers', 'SupplierController');
+        Route::apiResource('subcontractors', 'SubcontractorController');
         // Inventory routes
         Route::apiResource('brands', 'BrandController');
         Route::apiResource('units', 'UnitController');

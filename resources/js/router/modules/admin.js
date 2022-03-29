@@ -84,6 +84,67 @@ const adminRoutes = {
       name: 'ClientList',
       meta: { title: 'clients', icon: 'list', permissions: ['view client list'] },
     },
+
+    
+    /** Supplier managements */
+    {
+      path: 'suppliers/view/:id',
+      component: () => import('@/views/suppliers/View'),
+      name: 'ViewSupplier',
+      meta: { title: 'viewSupplier', noCache: true, permissions: ['view supplier'] },
+      hidden: true,
+    },
+    {
+      path: 'suppliers/edit/:id',
+      component: () => import('@/views/suppliers/Edit'),
+      name: 'EditSupplier',
+      meta: { title: 'editSupplier', noCache: true, permissions: ['update supplier'] },
+      hidden: true,
+    },
+    {
+      path: 'suppliers/create',
+      component: () => import('@/views/suppliers/Create'),
+      name: 'CreateSupplier',
+      meta: { title: 'createSupplier', noCache: true, permissions: ['add supplier'] },
+      hidden: true,
+    },
+    {
+      path: 'suppliers',
+      component: () => import('@/views/suppliers/List'),
+      name: 'SupplierList',
+      meta: { title: 'suppliers', icon: 'list', permissions: ['view supplier list'] },
+    },
+
+
+    
+    /** Subcontractor managements */
+    {
+      path: 'subcontractors/view/:id',
+      component: () => import('@/views/subcontractors/View'),
+      name: 'ViewSubcontractor',
+      meta: { title: 'viewSubcontractor', noCache: true, permissions: ['view subcontractor'] },
+      hidden: true,
+    },
+    {
+      path: 'subcontractors/edit/:id',
+      component: () => import('@/views/subcontractors/Edit'),
+      name: 'EditSubcontractor',
+      meta: { title: 'editSubcontractor', noCache: true, permissions: ['update subcontractor'] },
+      hidden: true,
+    },
+    {
+      path: 'subcontractors/create',
+      component: () => import('@/views/subcontractors/Create'),
+      name: 'CreateSubcontractor',
+      meta: { title: 'createSubcontractor', noCache: true, permissions: ['add subcontractor'] },
+      hidden: true,
+    },
+    {
+      path: 'subcontractors',
+      component: () => import('@/views/subcontractors/List'),
+      name: 'SubcontractorList',
+      meta: { title: 'subcontractors', icon: 'list', permissions: ['view subcontractor list'] },
+    },
   ],
 };
 

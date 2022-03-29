@@ -74,6 +74,15 @@ export default {
     editClient: 'Edit Client',
     viewClient: 'View Client',
     clients: 'Clients',
+    
+    createSupplier: 'Create Supplier',
+    editSupplier: 'Edit Supplier',
+    viewSupplier: 'View Supplier',
+    suppliers: 'Suppliers',
+    createSubcontractor: 'Create Subcontractor',
+    editSubcontractor: 'Edit Subcontractor',
+    viewSubcontractor: 'View Subcontractor',
+    subcontractors: 'Subcontractors',
 
     inventory: 'Inventory',
     brands: 'Brands',
@@ -197,6 +206,12 @@ export default {
     'confirmPassword': 'Confirm password',
     'name': 'Name',
     'email': 'Email',
+    'first_name': 'First Name',
+    'last_name': 'Last Name',
+    'business_name': 'Business Name',
+    'contact_person': 'Contact Person',
+    'contact_no': 'Contact No',
+    'address': 'Address',
   },
   roles: {
     description: {
@@ -208,12 +223,5 @@ export default {
     },
   },
   client: {
-    'first_name': 'First Name',
-    'last_name': 'Last Name',
-    'business_name': 'Business Name',
-    'email': 'Email',
-    'contact_person': 'Contact Person',
-    'contact_no': 'Contact No',
-    'address': 'Address',
   }
 };
