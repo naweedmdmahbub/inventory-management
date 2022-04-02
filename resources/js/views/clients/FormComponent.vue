@@ -6,25 +6,25 @@
       label-position="left"
       label-width="150px"
     >
-      <el-form-item :label="$t('client.first_name')" prop="first_name">
+      <el-form-item :label="$t('user.first_name')" prop="first_name">
         <el-input v-model="client.first_name" :disabled="mode === 'view'" />
       </el-form-item>
-      <el-form-item :label="$t('client.last_name')" prop="last_name">
+      <el-form-item :label="$t('user.last_name')" prop="last_name">
         <el-input v-model="client.last_name" :disabled="mode === 'view'" />
       </el-form-item>
-      <el-form-item :label="$t('client.business_name')" prop="business_name">
+      <el-form-item :label="$t('user.business_name')" prop="business_name">
         <el-input v-model="client.business_name" :disabled="mode === 'view'" />
       </el-form-item>
-      <el-form-item :label="$t('client.email')" prop="email">
+      <el-form-item :label="$t('user.email')" prop="email">
         <el-input v-model="client.email" :disabled="mode === 'view'" />
       </el-form-item>
-      <el-form-item :label="$t('client.contact_person')" prop="contact_person">
+      <el-form-item :label="$t('user.contact_person')" prop="contact_person">
         <el-input v-model="client.contact_person" :disabled="mode === 'view'" />
       </el-form-item>
-      <el-form-item :label="$t('client.contact_no')" prop="contact_no">
+      <el-form-item :label="$t('user.contact_no')" prop="contact_no">
         <el-input v-model="client.contact_no" :disabled="mode === 'view'" />
       </el-form-item>
-      <el-form-item :label="$t('client.address')" prop="address">
+      <el-form-item :label="$t('user.address')" prop="address">
         <el-input v-model="client.address" :disabled="mode === 'view'" />
       </el-form-item>
 
