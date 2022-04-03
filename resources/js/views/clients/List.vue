@@ -5,7 +5,7 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         {{ $t('table.search') }}
       </el-button>
-      <router-link to="/administrator/clients/create">
+      <router-link v-if="checkPermission(['add client'])" to="/administrator/clients/create">
         <el-button
           v-permission="['add client']"
           class="filter-item"
@@ -67,7 +67,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="Actions" width="350">
+      <el-table-column align="center" label="Actions">
         <template slot-scope="scope">
           <!-- <el-button
             v-permission="['view client']"
@@ -79,7 +79,7 @@
             View
           </el-button> -->
           
-          <router-link :to="'/administrator/clients/view/'+scope.row.id">
+          <router-link v-if="checkPermission(['view client'])" :to="'/administrator/clients/view/'+scope.row.id">
             <el-button
               v-permission="['view client']"
               type="warning"
@@ -89,7 +89,7 @@
               View
             </el-button>
           </router-link>
-          <router-link :to="'/administrator/clients/edit/'+scope.row.id">
+          <router-link v-if="checkPermission(['update client'])" :to="'/administrator/clients/edit/'+scope.row.id">
             <el-button
               v-permission="['update client']"
               type="primary"
@@ -128,6 +128,7 @@ import Pagination from '@/components/Pagination'; // Secondary package based on 
 import Resource from '@/api/resource';
 import waves from '@/directive/waves'; // Waves directive
 import permission from '@/directive/permission'; // Permission directive
+import checkPermission from '@/utils/permission'; // Permission checking
 const clientResource = new Resource('clients');
 
 export default {
@@ -154,6 +155,7 @@ export default {
     await this.getList();
   },
   methods: {
+    checkPermission,
     async getList() {
       const { limit, page } = this.query;
       this.loading = true;
