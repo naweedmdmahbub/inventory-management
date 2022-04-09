@@ -68,17 +68,7 @@
       </el-table-column>
 
       <el-table-column align="center" label="Actions">
-        <template slot-scope="scope">
-          <!-- <el-button
-            v-permission="['view client']"
-            type="warning"
-            size="small"
-            icon="el-icon-view"
-            @click="handleShow(scope.row.id);"
-          >
-            View
-          </el-button> -->
-          
+        <template slot-scope="scope">          
           <router-link v-if="checkPermission(['view client'])" :to="'/administrator/clients/view/'+scope.row.id">
             <el-button
               v-permission="['view client']"
