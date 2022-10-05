@@ -198,7 +198,7 @@ export default {
     async getList() {
       this.loading = true;
       const response = await brandResource.list(this.query);
-      // console.log('getList:', response, response.data);
+      console.log('getList:', response, response.data);
       this.list = response.data;
       this.total = response.meta.total;
       this.loading = false;

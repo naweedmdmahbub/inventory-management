@@ -24,22 +24,24 @@ class PermissionPrefixSeeder extends Seeder
             ['name' => 'brand'],
             ['name' => 'category'],
             ['name' => 'unit'],
+            
+            ['name' => 'project'],
+            ['name' => 'structure'],
+            ['name' => 'work'],
         ];
 
 
         // $permission_prefixes = [
-            // ['name' => 'product'],
-            // ['name' => 'purchase'],
 
-            // ['name' => 'project'],
-            // ['name' => 'structure'],
-            // ['name' => 'work'],
+        //     ['name' => 'product'],
+        //     ['name' => 'purchase'],
 
-            // ['name' => 'inventory'],
-            // ['name' => 'settings'],
-            // ['name' => 'export'],
 
-            // ['name' => 'activity'],
+        //     ['name' => 'inventory'],
+        //     ['name' => 'settings'],
+        //     ['name' => 'export'],
+
+        //     ['name' => 'activity'],
         // ];
 
         DB::table('permission_prefixes')->insert($permission_prefixes);

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Laravue\Models\Role;
 use Database\Seeders\PermissionPrefixSeeder;
 use Database\Seeders\PermissionSeeder;
+use Database\Seeders\RoleHasPermissionSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -57,5 +58,6 @@ class DatabaseSeeder extends Seeder
         
         $this->call(PermissionPrefixSeeder::class);
         $this->call(PermissionSeeder::class);
+        // $this->call(RoleHasPermissionSeeder::class);
     }
 }

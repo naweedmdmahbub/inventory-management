@@ -75,25 +75,35 @@ class PermissionSeeder extends Seeder
             ['name' =>  'update unit', 'guard_name' => 'api', 'permission_prefix_id' => '9'],
             ['name' =>  'view unit', 'guard_name' => 'api', 'permission_prefix_id' => '9'],
 
-            // // products permissions
-            // ['name' =>  'manage product', 'guard_name' => 'api', 'permission_prefix_id' => '10'],
-            // ['name' =>  'view product list', 'guard_name' => 'api', 'permission_prefix_id' => '10'],
-            // ['name' =>  'add product', 'guard_name' => 'api', 'permission_prefix_id' => '10'],
-            // ['name' =>  'update product', 'guard_name' => 'api', 'permission_prefix_id' => '10'],
-            // ['name' =>  'view product', 'guard_name' => 'api', 'permission_prefix_id' => '10'],
-            // // purchases permissions
-            // ['name' =>  'manage purchase', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
-            // ['name' =>  'view purchase list', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
-            // ['name' =>  'add purchase', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
-            // ['name' =>  'update purchase', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
-            // ['name' =>  'view purchase', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
-            // // projects permissions
-            // ['name' =>  'manage project', 'guard_name' => 'api', 'permission_prefix_id' => '12'],
-            // ['name' =>  'view project list', 'guard_name' => 'api', 'permission_prefix_id' => '12'],
-            // ['name' =>  'add project', 'guard_name' => 'api', 'permission_prefix_id' => '12'],
-            // ['name' =>  'update project', 'guard_name' => 'api', 'permission_prefix_id' => '12'],
-            // ['name' =>  'view project', 'guard_name' => 'api', 'permission_prefix_id' => '12'],
+            // projects permissions
+            ['name' =>  'manage project', 'guard_name' => 'api', 'permission_prefix_id' => '10'],
+            ['name' =>  'view project list', 'guard_name' => 'api', 'permission_prefix_id' => '10'],
+            ['name' =>  'add project', 'guard_name' => 'api', 'permission_prefix_id' => '10'],
+            ['name' =>  'update project', 'guard_name' => 'api', 'permission_prefix_id' => '10'],
+            ['name' =>  'view project', 'guard_name' => 'api', 'permission_prefix_id' => '10'],
+            // structures permissions
+            ['name' =>  'manage structure type', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
+            ['name' =>  'manage work type', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
+            ['name' =>  'manage structure', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
         ];
+        
+        // $permissions = [
+        //     // works permissions
+        //     ['name' =>  'manage work', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
+            
+        //     // products permissions
+        //     ['name' =>  'manage product', 'guard_name' => 'api', 'permission_prefix_id' => '12'],
+        //     ['name' =>  'view product list', 'guard_name' => 'api', 'permission_prefix_id' => '12'],
+        //     ['name' =>  'add product', 'guard_name' => 'api', 'permission_prefix_id' => '12'],
+        //     ['name' =>  'update product', 'guard_name' => 'api', 'permission_prefix_id' => '12'],
+        //     ['name' =>  'view product', 'guard_name' => 'api', 'permission_prefix_id' => '12'],
+        //     // purchases permissions
+        //     ['name' =>  'manage purchase', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
+        //     ['name' =>  'view purchase list', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
+        //     ['name' =>  'add purchase', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
+        //     ['name' =>  'update purchase', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
+        //     ['name' =>  'view purchase', 'guard_name' => 'api', 'permission_prefix_id' => '11'],
+        // ];
 
         DB::table('permissions')->insert($permissions);
     }
