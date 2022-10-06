@@ -14,6 +14,7 @@ import Layout from '@/layout';
 
 /* Router for modules */
 import inventoryRoutes from './modules/inventory';
+import projectRoutes from './modules/project';
 import adminRoutes from './modules/admin';
 import permissionRoutes from './modules/permission';
 
@@ -105,6 +106,7 @@ export const asyncRoutes = [
   permissionRoutes,
   adminRoutes,
   inventoryRoutes,
+  projectRoutes,
   {
     path: '/pdf',
     component: Layout,

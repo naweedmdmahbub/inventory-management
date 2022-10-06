@@ -13,3 +13,8 @@ export function showErrors(error){
     offset += 60;
   });
 }
+
+export function getCurrentDate(){
+  const current = new Date();
+  return `${current.getFullYear()}-${current.getMonth()}-${current.getDate()}`
+}

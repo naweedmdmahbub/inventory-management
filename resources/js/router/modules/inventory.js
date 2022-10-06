@@ -6,42 +6,15 @@ const excelRoutes = {
   component: Layout,
   redirect: '/inventory/brands',
   name: 'Inventory',
-  meta: {
-    title: 'inventory',
-    icon: 'nested',
-    permissions: ['view menu excel'],
-  },
+  meta: { title: 'inventory', icon: 'nested', permissions: ['view brand list'], },
   children: [
-    {
-      path: 'export-excel',
-      component: () => import('@/views/excel/ExportExcel'),
-      name: 'exportExcel',
-      meta: { title: 'exportExcel' },
-    },
-
-    
     /** Brand */
-    // {
-    //   path: 'brands/create',
-    //   component: () => import('@/views/brands/Create'),
-    //   name: 'CreateBrand',
-    //   meta: { title: 'createBrand', icon: 'edit', permissions: ['add brand'] },
-    //   hidden: true,
-    // },
-    // {
-    //   path: 'brands/edit/:id',
-    //   component: () => import('@/views/brands/Edit'),
-    //   name: 'BrandEdit',
-    //   meta: { title: 'editBrand', icon: 'list', permissions: ['update brand'] },
-    //   hidden: true,
-    // },
     {
       path: 'brands',
       component: () => import('@/views/brands/List'),
       name: 'BrandList',
       meta: { title: 'brands', icon: 'list', permissions: ['view brand list'] },
     },
-
     /** Unit */
     {
       path: 'units',

@@ -16,15 +16,14 @@ class ProjectResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->first_name,
-            'client_id' => $this->last_name,
-            'full_name' => $this->first_name.' '.$this->last_name,
-            'business_name' => $this->business_name,
-            'contact_person' => $this->contact_person,
-            'contact_no' => $this->contact_no,
-            'email' => $this->email,
-            'address' => $this->address,
-            'website' => $this->website,
+            'name' => $this->name,
+            'client_id' => $this->client_id,
+            'code' => $this->code,
+            'location' => $this->location,
+            'description' => $this->description,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'status' => $this->status,
         ];
     }
 }

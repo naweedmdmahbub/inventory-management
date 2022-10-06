@@ -88,6 +88,15 @@ export default {
     brands: 'Brands',
     units: 'Units',
     categories: 'Categories',
+    
+    project: 'Project',
+    projects: 'Projects',
+    createProject: 'Create Project',
+    editProject: 'Edit Project',
+    viewProject: 'View Project',
+
+    structures: 'Structures',
+    works: 'Works',
   },
   navbar: {
     logOut: 'Log Out',
@@ -222,6 +231,16 @@ export default {
       visitor: 'Visitor. Have access to static pages, should not have any writable permission',
     },
   },
-  client: {
+  project: {
+    'location': 'Location',
+  },
+  common: {
+    'name': 'Name',
+    'code': 'Code',
+    'description': 'Description',
+    'start_date': 'Start Date',
+    'end_date': 'End Date',
+    'status': 'Status',
+    'business_name': 'Business Name',
   }
 };
