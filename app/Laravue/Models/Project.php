@@ -12,6 +12,10 @@ class Project extends Model
     protected $guard_name = 'api';
     protected $fillable = ['name', 'client_id', 'code', 'location', 'location', 'description', 'start_date', 'end_date', 'status'];
 
+    public function client(){
+        return $this->belongsTo(Client::class);
+    }
+
     // Activity Logs begins
     protected static $logAttributes = ['name', 'client_id', 'code', 'location', 'location', 'description', 'start_date', 'end_date', 'status'];
     protected static $logOnlyDirty = true;

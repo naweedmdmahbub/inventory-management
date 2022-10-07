@@ -35,13 +35,19 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="name" align="center" sortable label="Name" width="200">
+      <el-table-column prop="name" align="center" sortable label="Name">
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column prop="code" align="center" sortable label="Code" width="200">
+      <el-table-column prop="client_name" align="center" sortable label="Client">
+        <template slot-scope="scope">
+          <span>{{ scope.row.client_name }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column prop="code" align="center" sortable label="Code">
         <template slot-scope="scope">
           <span>{{ scope.row.code }}</span>
         </template>
@@ -51,9 +57,9 @@
           <span>{{ scope.row.location }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="description" align="center" sortable label="Description">
+      <el-table-column prop="description" align="center" sortable label="Description" width="200">
         <template slot-scope="scope">
-          <span>{{ scope.row.description }}</span>
+          <span>{{ scope.row.description.length &lt; 50 ? scope.row.description : scope.row.description.substring(0, 50) +'...' }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="start_date" align="center" sortable label="Start Date">

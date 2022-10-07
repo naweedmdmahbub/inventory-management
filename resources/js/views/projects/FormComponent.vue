@@ -7,7 +7,7 @@
       label-width="150px"
     >
       <el-form-item :label="$t('common.business_name')" prop="client_id">
-        <el-select v-model="selectedClientID" placeholder="Please Select Client" :disabled="mode === 'view'">
+        <el-select v-model="selectedClientID" placeholder="Please Select Client" :disabled="mode === 'view'" width="100%">
             <el-option v-for="client in clients"
                       :key="client.id"
                       :label="client.business_name"
@@ -29,15 +29,13 @@
       </el-form-item>
 
       <el-form-item :label="$t('common.start_date')">
-        <el-date-picker v-model="project.start_date" type="date"
-                        placeholder="Pick a date" format="yyyy-MM-dd"
-                        value-format="yyyy-MM-dd" :disabled="mode === 'view'"
+        <el-date-picker v-model="project.start_date" type="date" placeholder="Pick a date"
+                        format="yyyy-MM-dd" value-format="yyyy-MM-dd" :disabled="mode === 'view'"
 />
       </el-form-item>
       <el-form-item :label="$t('common.end_date')">
-        <el-date-picker v-model="project.end_date" type="date"
-                        placeholder="Pick a date" format="yyyy-MM-dd"
-                        value-format="yyyy-MM-dd" :disabled="mode === 'view'"
+        <el-date-picker v-model="project.end_date" type="date" placeholder="Pick a date"
+                        format="yyyy-MM-dd" value-format="yyyy-MM-dd" :disabled="mode === 'view'"
 />
       </el-form-item>
 
@@ -70,6 +68,9 @@ export default {
       this.clients = data[0];
       console.log('mounted', this.clients);
     });
+    if (this.mode !== 'create'){
+      this.selectedClientID = this.project.client_id;
+    }
   },
   
   methods: {
@@ -115,6 +116,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+input, select{
+  width:100%;
+  box-sizing:border-box;
+}
 </style>

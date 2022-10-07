@@ -23,7 +23,7 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $searchParams = $request->all();
-        $projectQuery = Project::query();
+        $projectQuery = Project::with('client');
         $limit = Arr::get($searchParams, 'limit', static::ITEM_PER_PAGE);
         $keyword = Arr::get($searchParams, 'keyword', '');
 
@@ -78,7 +78,7 @@ class ProjectController extends Controller
     {
         // dd($request->all());
         try {
-            $input = $request->only('first_name', 'last_name', 'business_name', 'email', 'contact_person', 'contact_no', 'address');
+            $input = $request->only('name', 'client_id', 'code', 'location', 'description', 'start_date', 'end_date');
             $project = Project::find($id);
             DB::beginTransaction();
             $project->fill($input)->update();
