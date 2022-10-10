@@ -25,7 +25,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $searchParams = $request->all();
-        $categoryQuery = Category::query();
+        $categoryQuery = Category::with('image');
         $limit = Arr::get($searchParams, 'limit', static::ITEM_PER_PAGE);
         $keyword = Arr::get($searchParams, 'keyword', '');
 

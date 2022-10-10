@@ -95,6 +95,11 @@ export default {
     editProject: 'Edit Project',
     viewProject: 'View Project',
 
+    structureTypes: 'Structure Types',
+    createStructureType: 'Create Structure Type',
+    editStructureType: 'Edit Structure Type',
+    viewStructureType: 'View Structure Type',
+
     structures: 'Structures',
     works: 'Works',
   },
@@ -234,6 +239,17 @@ export default {
   project: {
     'location': 'Location',
   },
+  work: {
+    'workType': 'Work Type',
+    'workTypeItem': 'Work Type Item',
+    'nos': 'NOS',
+    'length': 'Length',
+    'breadth': 'Breadth',
+    'height': 'Height',
+    'weight': 'Weight',
+    'quantity': 'Quantity',
+    'total': 'Total',
+  },
   common: {
     'name': 'Name',
     'code': 'Code',
@@ -242,5 +258,6 @@ export default {
     'end_date': 'End Date',
     'status': 'Status',
     'business_name': 'Business Name',
+    'unit_id': 'Unit',
   }
 };

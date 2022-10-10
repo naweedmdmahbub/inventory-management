@@ -26,7 +26,7 @@ class BrandController extends Controller
     {
         // dd('hi');
         $searchParams = $request->all();
-        $brandQuery = Brand::query();
+        $brandQuery = Brand::with('image');
         $limit = Arr::get($searchParams, 'limit', static::ITEM_PER_PAGE);
         $keyword = Arr::get($searchParams, 'keyword', '');
 

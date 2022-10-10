@@ -151,6 +151,12 @@ module.exports = {
     'vue/multiline-html-element-content-newline': 'off',
     'vue/singleline-html-element-content-newline': 'off',
     "vue/require-prop-types":0,
-    "vue/html-indent": "off"
+    "vue/html-indent": "off",
+    "vue/html-closing-bracket-newline": "off",
+    "vue/attribute-hyphenation": "off",
+    // "vue/html-closing-bracket-newline": ["error", {
+    //     "singleline": "always",
+    //     "multiline": "always"
+    // }],
   },
 };

@@ -11,8 +11,7 @@
             <el-option v-for="client in clients"
                       :key="client.id"
                       :label="client.business_name"
-                      :value="client.id"
-/>
+                      :value="client.id" />
         </el-select>
       </el-form-item>
       <el-form-item :label="$t('common.name')" prop="name">
@@ -30,13 +29,11 @@
 
       <el-form-item :label="$t('common.start_date')">
         <el-date-picker v-model="project.start_date" type="date" placeholder="Pick a date"
-                        format="yyyy-MM-dd" value-format="yyyy-MM-dd" :disabled="mode === 'view'"
-/>
+                        format="yyyy-MM-dd" value-format="yyyy-MM-dd" :disabled="mode === 'view'" />
       </el-form-item>
       <el-form-item :label="$t('common.end_date')">
         <el-date-picker v-model="project.end_date" type="date" placeholder="Pick a date"
-                        format="yyyy-MM-dd" value-format="yyyy-MM-dd" :disabled="mode === 'view'"
-/>
+                        format="yyyy-MM-dd" value-format="yyyy-MM-dd" :disabled="mode === 'view'" />
       </el-form-item>
 
 

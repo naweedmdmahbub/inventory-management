@@ -9,16 +9,9 @@ const projectRoutes = {
   meta: {
     title: 'project',
     icon: 'nested',
-    permissions: ['view menu excel'],
+    permissions: ['view project list'],
   },
   children: [
-    // {
-    //   path: 'export-excel',
-    //   component: () => import('@/views/excel/ExportExcel'),
-    //   name: 'exportExcel',
-    //   meta: { title: 'exportExcel' },
-    // },
-
     /** Project managements */
     {
       path: 'projects/view/:id',
@@ -46,6 +39,35 @@ const projectRoutes = {
       component: () => import('@/views/projects/List'),
       name: 'ProjectList',
       meta: { title: 'projects', noCache: true, icon: 'list', permissions: ['view project list'] },
+    },
+    
+    /** Structure type */
+    {
+      path: 'structure-types/view/:id',
+      component: () => import('@/views/structure-types/View'),
+      name: 'ViewStructureType',
+      meta: { title: 'viewStructureType', permissions: ['manage structure type'] },
+      hidden: true,
+    },
+    {
+      path: 'structure-types/edit/:id',
+      component: () => import('@/views/structure-types/Edit'),
+      name: 'EditStructureType',
+      meta: { title: 'editStructureType', permissions: ['manage structure type'] },
+      hidden: true,
+    },
+    {
+      path: 'structure-types/create',
+      component: () => import('@/views/structure-types/Create'),
+      name: 'CreateStructureType',
+      meta: { title: 'createStructureType', permissions: ['manage structure type'] },
+      hidden: true,
+    },
+    {
+      path: 'structure-types',
+      component: () => import('@/views/structure-types/List'),
+      name: 'StructureTypeList',
+      meta: { title: 'structureTypes', noCache: true, icon: 'list', permissions: ['manage structure type'] },
     },
 
   ],
