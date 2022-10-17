@@ -12,15 +12,27 @@
       <el-form-item :label="$t('common.description')" prop="description">
         <el-input v-model="structureType.description" :disabled="mode === 'view'" />
       </el-form-item>
+      <el-form-item :label="$t('work.element')" prop="element_type_id">
+        <el-select v-model="structureType.element_type_id" placeholder="Please Select Element"
+                  :disabled="mode === 'view'" width="100%" @change="changeElementTypeID">
+            <el-option v-for="element in elements"
+                      :key="element.id"
+                      :label="element.name"
+                      :value="element.id" />
+        </el-select>
+      </el-form-item>
 
       <template v-for="(workType, index) in structureType.workTypes">
         <work-type-component :key="'workType-'+index"
           :structureType="structureType"
           :workType="workType"
           :mode="mode"
+          :selectedElementType="selectedElementType"
         />
       </template>
-      <el-button v-if="mode !== 'view'" type="primary" @click="addItem">Add Work Type</el-button>
+
+
+      <el-button v-if="mode !== 'view'" type="info" @click="addItem">Add Work Type</el-button>
       
 
       <el-form-item>
@@ -42,13 +54,85 @@ export default {
   props: ['structureType', 'mode'],
   data() {
     return {
-      selectedUnitID: null,
-      units: [],
+      selectedElementType: 'RodElement',
+      selectedElementTypeID: null,
+      RodElementType: null,
+      BrickElementType: null,
+      PileElementType: null,
+      elements: [],
     }
   },
   async mounted(){
+    var models = ['ElementType'];
+    await axios.post('/api/get-model-data', models).then(({ data }) => {
+      console.log(data);
+      this.elements = data[0];
+      // console.log('mounted', this.elements);
+    });
   },
   async created(){
+    
+    this.RodElementType = {
+        name: '',
+        structure_type_id: null,
+        total: null,
+        workTypeItems: [{
+          work_type_id: null,
+          element_type_id: 1,
+          name: '',
+          description: '',
+
+          dia: 10,
+          rod_length: 1,
+          lap: 0,
+          matam: 0,
+          cutting_length: 1,
+          nos: 1,
+          layer: 1,
+          item: 1,
+          total_length: null,
+          unit_weight: null,
+          weight: null,
+        }]
+    };
+    this.BrickElementType = {
+        name: '',
+        structure_type_id: null,
+        workTypeItems: [{
+          work_type_id: null,
+          element_type_id: 2,
+          name: '',
+          description: '',
+          nos: null,
+
+          length: null,
+          breadth: null,
+          height: null,
+          
+          weight: null,
+          quantity: null,
+          total: null,
+        }]
+    };
+    this.PileElementType = {
+        name: '',
+        structure_type_id: null,
+        workTypeItems: [{
+          work_type_id: null,
+          element_type_id: 2,
+          name: '',
+          description: '',
+          nos: null,
+
+          length: null,
+          breadth: null,
+          height: null,
+          
+          weight: null,
+          quantity: null,
+          total: null,
+        }]
+    };
     console.log('structureType create:', this.structureType);
   },
   
@@ -58,7 +142,7 @@ export default {
     },
     async handleSubmit() {
       console.log('handleSubmit:', this.structureType)
-      this.structureType.unit_id = this.selectedUnitID;
+      // this.structureType.element_type_id = this.selectedElementTypeID;
       if (this.structureType.id !== undefined) {
         this.structureType.status = 'active';
         axios
@@ -92,28 +176,26 @@ export default {
       }
     },
     addItem(){
-      var item = {
-          name: '',
-          structure_type_id: null,
-          workTypeItems: [{
-            work_type_id: null,
-            unit_id: null,
-            name: '',
-            description: '',
-            nos: null,
-
-            length: null,
-            breadth: null,
-            height: null,
-            
-            weight: null,
-            quantity: null,
-            total: null,
-          }]
-      };
-      this.structureType.workTypes.push(item);
-
+      switch (this.structureType.element_type_id){
+        case 1:
+          this.structureType.workTypes.push(this.RodElementType);
+          this.selectedElementType = 'RodElement';
+          break;
+        case 2:
+          this.structureType.workTypes.push(this.BrickElementType);
+          this.selectedElementType = 'BrickElement';
+          break;
+        case 3:
+          this.structureType.workTypes.push(this.PileElementType);
+          this.selectedElementType = 'PileElement';
+          break;
+      }
     },
+    changeElementTypeID(){
+      this.structureType.workTypes = [];
+      this.addItem();
+      console.log('changeElementTypeID', this);
+    }
   }
 }
 </script>
