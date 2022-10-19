@@ -73,7 +73,7 @@ module.exports = {
       'allowSwitch': false
     }],
     'no-lone-blocks': 2,
-    'no-multi-spaces': 2,
+    'no-multi-spaces': 0,
     // 'no-multiple-empty-lines': [2, {
     //   'max': 1
     // }],

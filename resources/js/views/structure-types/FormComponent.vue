@@ -3,7 +3,6 @@
     <el-form
       ref="structureTypeForm"
       :model="structureType"
-      label-position="left"
       label-width="150px"
     >
       <el-form-item :label="$t('common.name')" prop="name">
@@ -54,12 +53,22 @@ export default {
   props: ['structureType', 'mode'],
   data() {
     return {
-      selectedElementType: 'RodElement',
+      selectedElementType: 'BuildingElement',
       selectedElementTypeID: null,
       RodElementType: null,
-      BrickElementType: null,
+      BuildingElementType: null,
       PileElementType: null,
       elements: [],
+    }
+  },
+  watch: {
+    structureType: {
+      handler(newValue, oldValue) {
+        // Note: `newValue` will be equal to `oldValue` here
+        // on nested mutations as long as the object itself
+        // hasn't been replaced.
+      },
+      deep: true
     }
   },
   async mounted(){
@@ -95,7 +104,7 @@ export default {
           weight: null,
         }]
     };
-    this.BrickElementType = {
+    this.BuildingElementType = {
         name: '',
         structure_type_id: null,
         workTypeItems: [{
@@ -117,20 +126,19 @@ export default {
     this.PileElementType = {
         name: '',
         structure_type_id: null,
+        total: null,
         workTypeItems: [{
           work_type_id: null,
-          element_type_id: 2,
+          element_type_id: 3,
           name: '',
           description: '',
-          nos: null,
-
-          length: null,
-          breadth: null,
-          height: null,
           
-          weight: null,
+          unit: null,
+          nos: 1,
+          length: 1,
+          breadth: 1,
+          height: 1,
           quantity: null,
-          total: null,
         }]
     };
     console.log('structureType create:', this.structureType);
@@ -178,12 +186,12 @@ export default {
     addItem(){
       switch (this.structureType.element_type_id){
         case 1:
-          this.structureType.workTypes.push(this.RodElementType);
-          this.selectedElementType = 'RodElement';
+          this.structureType.workTypes.push(this.BuildingElementType);
+          this.selectedElementType = 'BuildingElement';
           break;
         case 2:
-          this.structureType.workTypes.push(this.BrickElementType);
-          this.selectedElementType = 'BrickElement';
+          this.structureType.workTypes.push(this.RodElementType);
+          this.selectedElementType = 'RodElement';
           break;
         case 3:
           this.structureType.workTypes.push(this.PileElementType);
@@ -196,7 +204,7 @@ export default {
       this.addItem();
       console.log('changeElementTypeID', this);
     }
-  }
+  },
 }
 </script>
 

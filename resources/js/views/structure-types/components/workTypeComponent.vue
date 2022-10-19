@@ -24,21 +24,18 @@
 <script>
 import WorkTypeItemComponent from './workTypeItemComponent';
 import RodElement from './RodElement';
-import BrickElement from './BrickElement';
+import BuildingElement from './BuildingElement';
 import PileElement from './PileElement';
 export default {
-  components: { WorkTypeItemComponent, RodElement, BrickElement, PileElement },
+  components: { WorkTypeItemComponent, RodElement, BuildingElement, PileElement },
   // props: ['structureType', 'workType', 'mode', 'selectedElement'],
   props: ['structureType', 'workType', 'mode', 'selectedElementType'],
   data() {
     return {
-      RodElementType: null,
-      BrickElementType: null,
-      PileElementType: null,
-      
+      RodElementTypeItem: null,
+      BuildingElementTypeItem: null,
+      PileElementTypeItem: null,
     }
-  },
-  async mounted(){
   },
   async created(){
     
@@ -60,7 +57,7 @@ export default {
         unit_weight: null,
         weight: null,
     };
-    this.BrickElementTypeItem = {
+    this.BuildingElementTypeItem = {
         work_type_id: null,
         element_type_id: 2,
         name: '',
@@ -95,18 +92,19 @@ export default {
   
   methods: {
     addItem(){
+      var elementType;
       switch (this.structureType.element_type_id){
         case 1:
-          this.workType.workTypeItems.push(this.RodElementTypeItem);
-          // this.selectedElementType = 'RodElement';
+          elementType = { ...this.BuildingElementTypeItem };
+          this.workType.workTypeItems.push(elementType);
           break;
         case 2:
-          this.workType.workTypeItems.push(this.BrickElementTypeItem);
-          // this.selectedElementType = 'BrickElement';
+          elementType = { ...this.RodElementTypeItem };
+          this.workType.workTypeItems.push(elementType);
           break;
         case 3:
-          this.workType.workTypeItems.push(this.PileElementTypeItem);
-          // this.selectedElementType = 'PileElement';
+          elementType = { ...this.PileElementTypeItem };
+          this.workType.workTypeItems.push(elementType);
           break;
       }
       // this.workType.workTypeItems.push(item);

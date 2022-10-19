@@ -1,21 +1,20 @@
 <template>
   <tr>
     <td>
-      <el-col :span="6">
-        <el-form-item :label="$t('work.workTypeItem')" prop="name">
-          <el-input v-model="workTypeItem.name" :disabled="mode === 'view'" />
-        </el-form-item>
-      </el-col>
-
-
-      <el-col :span="18">
-          <el-col :span="7" :offset="1">
+      <el-row :gutter="20">
+          <el-col :span="11" :offset="1">
+            <el-form-item :label="$t('work.workTypeItem')" prop="name">
+              <el-input v-model="workTypeItem.name" :disabled="mode === 'view'" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="11" :offset="1">
               <el-form-item :label="$t('common.description')" prop="description">
-                  <el-input v-model="workTypeItem.description" :placeholder="$t('common.description')" />
+                  <el-input v-model="workTypeItem.description" type="textarea" :placeholder="$t('common.description')" />
               </el-form-item>
           </el-col>
+      </el-row>
 
-
+      <el-row :gutter="20">
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.dia')" prop="dia">
                   <el-input v-model="workTypeItem.dia" :placeholder="$t('work.dia')" @change="calculateCuttingLength" />
@@ -31,8 +30,8 @@
                   <el-input v-model="workTypeItem.lap" :placeholder="$t('work.lap')" @change="calculateCuttingLength" />
               </el-form-item>
           </el-col>
-
-          
+      </el-row>
+      <el-row :gutter="20">
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.matam')" prop="matam">
                   <el-input v-model="workTypeItem.matam" :placeholder="$t('work.matam')" />
@@ -43,6 +42,10 @@
                   <el-input v-model="workTypeItem.cutting_length" :disabled="true" :placeholder="$t('work.cutting_length')" />
               </el-form-item>
           </el-col>
+      </el-row>
+
+              
+      <el-row :gutter="20">
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.nos')" prop="nos">
                   <el-input v-model="workTypeItem.nos" :placeholder="$t('work.nos')" @change="calculateCuttingLength" />
@@ -58,6 +61,8 @@
                   <el-input v-model="workTypeItem.item" :placeholder="$t('work.item')" @change="calculateCuttingLength" />
               </el-form-item>
           </el-col>
+      </el-row>
+      <el-row :gutter="20">
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.total_length')" prop="total_length">
                   <el-input v-model="workTypeItem.total_length" :disabled="true" :placeholder="$t('work.total_length')" />
@@ -73,10 +78,7 @@
                   <el-input v-model="workTypeItem.weight" :disabled="true" :placeholder="$t('work.weight')" />
               </el-form-item>
           </el-col>
-
-
-      </el-col>
-
+      </el-row>
       
     </td>
   </tr>
