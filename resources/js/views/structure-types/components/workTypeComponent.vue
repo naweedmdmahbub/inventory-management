@@ -39,9 +39,24 @@ export default {
   },
   async created(){
     
-    this.RodElementTypeItem = {
+    this.BuildingElementTypeItem = {
         work_type_id: null,
         element_type_id: 1,
+        name: '',
+        description: '',
+        nos: null,
+
+        length: null,
+        breadth: null,
+        height: null,
+        
+        unit_id: null,
+        quantity: null,
+        total: null,
+    };
+    this.RodElementTypeItem = {
+        work_type_id: null,
+        element_type_id: 2,
         name: '',
         description: '',
 
@@ -57,35 +72,23 @@ export default {
         unit_weight: null,
         weight: null,
     };
-    this.BuildingElementTypeItem = {
-        work_type_id: null,
-        element_type_id: 2,
-        name: '',
-        description: '',
-        nos: null,
-
-        length: null,
-        breadth: null,
-        height: null,
-        
-        weight: null,
-        quantity: null,
-        total: null,
-    };
     this.PileElementTypeItem = {
         work_type_id: null,
-        element_type_id: 2,
+        element_type_id: 3,
         name: '',
-        description: '',
-        nos: null,
-
-        length: null,
-        breadth: null,
-        height: null,
         
-        weight: null,
+        pile: null,
+        pile_dia: null,
         quantity: null,
-        total: null,
+        bar_dia: null,
+        rebar_num: null,
+        length: null,
+        laping: null,
+        actual_length: null,
+        total_length: null,
+        unit_weight: null,
+        total_weight: null,
+        remarks: null,
     };
     // console.log('workType create:', this.workType, this.structureType);
   },
@@ -107,8 +110,6 @@ export default {
           this.workType.workTypeItems.push(elementType);
           break;
       }
-      // this.workType.workTypeItems.push(item);
-
     },
   }
 }

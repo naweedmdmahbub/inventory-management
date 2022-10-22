@@ -16,27 +16,23 @@ export default {
         description: '',
         element_type_id: 1,
         workTypes: [{
-            name: '',
-            structure_type_id: null,
+          name: '',
+          structure_type_id: null,
+          workTypeItems: [{
+            work_type_id: null,
             element_type_id: 1,
-            workTypeItems: [{
-              work_type_id: null,
-              element_type_id: 1,
-              name: '',
-              description: '',
+            name: '',
+            description: '',
+            nos: null,
 
-              dia: 10,
-              rod_length: 1,
-              lap: 0,
-              matam: 0,
-              cutting_length: 1,
-              nos: 1,
-              layer: 1,
-              item: 1,
-              total_length: null,
-              unit_weight: null,
-              weight: null,
-            }]
+            length: null,
+            breadth: null,
+            height: null,
+            
+            weight: null,
+            quantity: null,
+            total: null,
+          }]
         }],
       },
       mode: 'create',

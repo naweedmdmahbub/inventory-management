@@ -17,6 +17,7 @@ class CreateWorkTypesTable extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('structure_type_id');
+            $table->float('total');
             $table->timestamps();
         });
     }

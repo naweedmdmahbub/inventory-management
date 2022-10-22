@@ -22,7 +22,8 @@
       </el-form-item>
 
       <template v-for="(workType, index) in structureType.workTypes">
-        <work-type-component :key="'workType-'+index"
+        <work-type-component v-if="isMounted"
+          :key="'workType-'+index"
           :structureType="structureType"
           :workType="workType"
           :mode="mode"
@@ -59,16 +60,7 @@ export default {
       BuildingElementType: null,
       PileElementType: null,
       elements: [],
-    }
-  },
-  watch: {
-    structureType: {
-      handler(newValue, oldValue) {
-        // Note: `newValue` will be equal to `oldValue` here
-        // on nested mutations as long as the object itself
-        // hasn't been replaced.
-      },
-      deep: true
+      isMounted: false,
     }
   },
   async mounted(){
@@ -76,18 +68,38 @@ export default {
     await axios.post('/api/get-model-data', models).then(({ data }) => {
       console.log(data);
       this.elements = data[0];
-      // console.log('mounted', this.elements);
+      this.isMounted = true;
+      console.log('FormComponent mounted', this.elements, this.isMounted);
     });
   },
   async created(){
     
+    this.BuildingElementType = {
+        name: '',
+        structure_type_id: null,
+        workTypeItems: [{
+          work_type_id: null,
+          element_type_id: 1,
+          name: '',
+          description: '',
+          nos: null,
+
+          length: null,
+          breadth: null,
+          height: null,
+          
+          weight: null,
+          quantity: null,
+          total: null,
+        }]
+    };
     this.RodElementType = {
         name: '',
         structure_type_id: null,
         total: null,
         workTypeItems: [{
           work_type_id: null,
-          element_type_id: 1,
+          element_type_id: 2,
           name: '',
           description: '',
 
@@ -104,25 +116,6 @@ export default {
           weight: null,
         }]
     };
-    this.BuildingElementType = {
-        name: '',
-        structure_type_id: null,
-        workTypeItems: [{
-          work_type_id: null,
-          element_type_id: 2,
-          name: '',
-          description: '',
-          nos: null,
-
-          length: null,
-          breadth: null,
-          height: null,
-          
-          weight: null,
-          quantity: null,
-          total: null,
-        }]
-    };
     this.PileElementType = {
         name: '',
         structure_type_id: null,
@@ -131,14 +124,19 @@ export default {
           work_type_id: null,
           element_type_id: 3,
           name: '',
-          description: '',
           
-          unit: null,
-          nos: 1,
-          length: 1,
-          breadth: 1,
-          height: 1,
+          pile: null,
+          pile_dia: null,
           quantity: null,
+          bar_dia: null,
+          rebar_num: null,
+          length: null,
+          laping: null,
+          actual_length: null,
+          total_length: null,
+          unit_weight: null,
+          total_weight: null,
+          remarks: null,
         }]
     };
     console.log('structureType create:', this.structureType);

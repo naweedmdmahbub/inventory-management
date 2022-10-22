@@ -1,72 +1,90 @@
 <template>
   <tr>
     <td>
-      <el-col :span="6">
-        <el-form-item :label="$t('work.workTypeItem')" prop="name">
-          <el-input v-model="workTypeItem.name" :disabled="mode === 'view'" />
-        </el-form-item>
-      </el-col>
-
-
-      <el-col :span="18">
-          <el-col :span="7" :offset="1">
-              <el-form-item :label="$t('common.description')" prop="description">
-                  <el-input v-model="workTypeItem.description" :placeholder="$t('common.description')" />
-              </el-form-item>
-          </el-col>
-
-
-
-          <el-col :span="7" :offset="1">
-            <el-form-item :label="$t('common.unit_id')" prop="unit_id">
-              <el-select v-model="workTypeItem.unit_id" placeholder="Please Select Unit" :disabled="mode === 'view'" width="100%">
-                  <el-option v-for="unit in units"
-                            :key="unit.id"
-                            :label="unit.name"
-                            :value="unit.id" />
-              </el-select>
+      <el-row :gutter="20">
+          <el-col :span="11" :offset="1">
+            <el-form-item :label="$t('work.workTypeItem')" prop="name">
+              <el-input v-model="workTypeItem.name" :placeholder="$t('work.breadth')" />
             </el-form-item>
           </el-col>
-          <el-col :span="7" :offset="1">
-              <el-form-item :label="$t('work.nos')" prop="nos">
-                  <el-input v-model="workTypeItem.nos" :placeholder="$t('work.nos')" />
+          <el-col :span="11" :offset="1">
+              <el-form-item :label="$t('common.description')" prop="description">
+                  <el-input v-model="workTypeItem.description" type="textarea" :placeholder="$t('common.description')" />
               </el-form-item>
           </el-col>
+      </el-row>
 
+      <el-row :gutter="20">
           <el-col :span="7" :offset="1">
-              <el-form-item :label="$t('work.length')" prop="length">
-                  <el-input v-model="workTypeItem.length" :placeholder="$t('work.length')" />
+              <el-form-item :label="$t('work.pile')" prop="pile">
+                  <el-input v-model="workTypeItem.pile" :placeholder="$t('work.pile')" @change="calculateQuantity" />
               </el-form-item>
           </el-col>
           <el-col :span="7" :offset="1">
-              <el-form-item :label="$t('work.breadth')" prop="breadth">
-                  <el-input v-model="workTypeItem.breadth" :placeholder="$t('work.breadth')" />
-              </el-form-item>
-          </el-col>
-          <el-col :span="7" :offset="1">
-              <el-form-item :label="$t('work.height')" prop="height">
-                  <el-input v-model="workTypeItem.height" :placeholder="$t('work.height')" />
-              </el-form-item>
-          </el-col>
-          
-          <el-col :span="7" :offset="1">
-              <el-form-item :label="$t('work.weight')" prop="weight">
-                  <el-input v-model="workTypeItem.weight" :placeholder="$t('work.weight')" />
+              <el-form-item :label="$t('work.pile_dia')" prop="pile_dia">
+                  <el-input v-model="workTypeItem.pile_dia" :placeholder="$t('work.pile_dia')" @change="calculateQuantity" />
               </el-form-item>
           </el-col>
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.quantity')" prop="quantity">
-                  <el-input v-model="workTypeItem.quantity" :placeholder="$t('work.quantity')" />
+                  <el-input v-model="workTypeItem.quantity" :disabled="true" :placeholder="$t('work.quantity')" />
+              </el-form-item>
+          </el-col>
+      </el-row>
+
+      <el-row :gutter="20">
+          <el-col :span="7" :offset="1">
+              <el-form-item :label="$t('work.bar_dia')" prop="bar_dia">
+                  <el-input v-model="workTypeItem.bar_dia" :placeholder="$t('work.bar_dia')" @change="calculateQuantity" />
               </el-form-item>
           </el-col>
           <el-col :span="7" :offset="1">
-              <el-form-item :label="$t('work.total')" prop="total">
-                  <el-input v-model="workTypeItem.total" :placeholder="$t('work.total')" />
+              <el-form-item :label="$t('work.rebar_num')" prop="rebar_num">
+                  <el-input v-model="workTypeItem.rebar_num" :placeholder="$t('work.rebar_num')" @change="calculateQuantity" />
               </el-form-item>
           </el-col>
+          <el-col :span="7" :offset="1">
+              <el-form-item :label="$t('work.length')" prop="length">
+                  <el-input v-model="workTypeItem.length" :placeholder="$t('work.length')" @change="calculateQuantity" />
+              </el-form-item>
+          </el-col>
+      </el-row>
 
-      </el-col>
-
+      <el-row :gutter="20">
+          <el-col :span="7" :offset="1">
+              <el-form-item :label="$t('work.laping')" prop="laping">
+                  <el-input v-model="workTypeItem.laping" :placeholder="$t('work.laping')" @change="calculateQuantity" />
+              </el-form-item>
+          </el-col>
+          <el-col :span="7" :offset="1">
+              <el-form-item :label="$t('work.actual_length')" prop="actual_length">
+                  <el-input v-model="workTypeItem.actual_length" :placeholder="$t('work.actual_length')" @change="calculateQuantity" />
+              </el-form-item>
+          </el-col>
+          <el-col :span="7" :offset="1">
+              <el-form-item :label="$t('work.total_length')" prop="total_length">
+                  <el-input v-model="workTypeItem.total_length" :placeholder="$t('work.total_length')" @change="calculateQuantity" />
+              </el-form-item>
+          </el-col>
+      </el-row>
+              
+      <el-row :gutter="20">
+          <el-col :span="7" :offset="1">
+              <el-form-item :label="$t('work.unit_weight')" prop="unit_weight">
+                  <el-input v-model="workTypeItem.unit_weight" :placeholder="$t('work.unit_weight')" @change="calculateQuantity" />
+              </el-form-item>
+          </el-col>
+          <el-col :span="7" :offset="1">
+              <el-form-item :label="$t('work.total_weight')" prop="total_weight">
+                  <el-input v-model="workTypeItem.total_weight" :placeholder="$t('work.total_weight')" @change="calculateQuantity" />
+              </el-form-item>
+          </el-col>
+          <el-col :span="7" :offset="1">
+              <el-form-item :label="$t('work.remarks')" prop="remarks">
+                  <el-input v-model="workTypeItem.remarks" :placeholder="$t('work.remarks')" @change="calculateQuantity" />
+              </el-form-item>
+          </el-col>
+      </el-row>
       
     </td>
   </tr>
@@ -83,7 +101,7 @@ export default {
     }
   },
   async mounted(){
-    var models = ['Unit'];
+    let models = ['Unit'];
     await axios.post('/api/get-model-data', models).then(({ data }) => {
       console.log(data);
       this.units = data[0];
@@ -95,6 +113,17 @@ export default {
   },
   
   methods: {
+    async calculateQuantity(){
+      console.log('calculateQuantity item: ', this.workTypeItem);
+      let quantity = 1;
+      quantity = this.workTypeItem.length ? this.workTypeItem.length * quantity : quantity;
+      quantity = this.workTypeItem.breadth ? this.workTypeItem.breadth * quantity : quantity;
+      quantity = this.workTypeItem.height ? this.workTypeItem.height * quantity : quantity;
+      quantity = this.workTypeItem.nos ? this.workTypeItem.nos * quantity : quantity;
+      this.workTypeItem.quantity = parseFloat(quantity).toFixed(6);
+      // this.workTypeItem.quantity = parseFloat(this.workTypeItem.length * this.workTypeItem.breadth * this.workTypeItem.height * this.workTypeItem.nos).toFixed(6);
+      console.log('calculateQuantity: ', this.workTypeItem);
+    },
   }
 }
 </script>

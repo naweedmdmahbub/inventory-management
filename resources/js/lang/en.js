@@ -259,6 +259,15 @@ export default {
     'layer': 'Layer',
     'item': 'Item',
     'unit_weight': 'Unit Weight',
+    'total_weight': 'Total Weight',
+
+    'pile': 'Pile',
+    'pile_dia': 'Pile Dia',
+    'bar_dia': 'Bar Dia',
+    'rebar_num': 'No of Rebar',
+    'laping': 'Laping',
+    'actual_length': 'Actual Length',
+    'remarks': 'Remarks',
   },
   common: {
     'name': 'Name',

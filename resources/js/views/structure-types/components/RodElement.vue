@@ -17,7 +17,7 @@
       <el-row :gutter="20">
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.dia')" prop="dia">
-                  <el-input v-model="workTypeItem.dia" :placeholder="$t('work.dia')" @change="calculateCuttingLength" />
+                  <el-input v-model="workTypeItem.dia" :placeholder="$t('work.dia')" @change="calculateUnitWeight" />
               </el-form-item>
           </el-col>
           <el-col :span="7" :offset="1">
@@ -34,7 +34,7 @@
       <el-row :gutter="20">
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.matam')" prop="matam">
-                  <el-input v-model="workTypeItem.matam" :placeholder="$t('work.matam')" />
+                  <el-input v-model="workTypeItem.matam" :placeholder="$t('work.matam')" @change="calculateCuttingLength" />
               </el-form-item>
           </el-col>
           <el-col :span="7" :offset="1">
@@ -108,6 +108,10 @@ export default {
   },
   
   methods: {
+    calculateUnitWeight(){
+      this.workTypeItem.unit_weight = parseFloat(this.workTypeItem.dia * this.workTypeItem.dia / 162).toFixed(6);
+      this.calculateTotalLength();
+    },
     calculateCuttingLength(){
       var item = this.workTypeItem;
       this.workTypeItem.cutting_length = parseFloat(item.rod_length)+ (parseFloat(item.lap)*(50*16)) + (parseFloat(item.matam)*2);

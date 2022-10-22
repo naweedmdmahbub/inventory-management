@@ -51,7 +51,7 @@
           </el-col>
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.quantity')" prop="quantity">
-                  <el-input v-model="workTypeItem.quantity" :disabled="true" :placeholder="$t('work.quantity')" @change="calculateQuantity" />
+                  <el-input v-model="workTypeItem.quantity" :disabled="true" :placeholder="$t('work.quantity')" />
               </el-form-item>
           </el-col>
       </el-row>
@@ -70,18 +70,8 @@ export default {
       units: [],
     }
   },
-  watch: {
-    workTypeItem: {
-      handler(newValue, oldValue) {
-        // Note: `newValue` will be equal to `oldValue` here
-        // on nested mutations as long as the object itself
-        // hasn't been replaced.
-      },
-      deep: true
-    }
-  },
   async mounted(){
-    var models = ['Unit'];
+    let models = ['Unit'];
     await axios.post('/api/get-model-data', models).then(({ data }) => {
       console.log(data);
       this.units = data[0];
@@ -94,27 +84,16 @@ export default {
   
   methods: {
     async calculateQuantity(){
-      // let quantity = await this.cal();
-      var item = { ...this.workTypeItem };
-      var quantity = 1;
-      quantity = item.length ? item.length * quantity : quantity;
-      quantity = item.breadth ? item.breadth * quantity : quantity;
-      quantity = item.height ? item.height * quantity : quantity;
-      quantity = item.nos ? item.nos * quantity : quantity;
+      console.log('calculateQuantity item: ', this.workTypeItem);
+      let quantity = 1;
+      quantity = this.workTypeItem.length ? this.workTypeItem.length * quantity : quantity;
+      quantity = this.workTypeItem.breadth ? this.workTypeItem.breadth * quantity : quantity;
+      quantity = this.workTypeItem.height ? this.workTypeItem.height * quantity : quantity;
+      quantity = this.workTypeItem.nos ? this.workTypeItem.nos * quantity : quantity;
       this.workTypeItem.quantity = parseFloat(quantity).toFixed(6);
-      // this.workTypeItem.quantity = parseFloat(item.length * item.breadth * item.height * item.nos).toFixed(6);
+      // this.workTypeItem.quantity = parseFloat(this.workTypeItem.length * this.workTypeItem.breadth * this.workTypeItem.height * this.workTypeItem.nos).toFixed(6);
       console.log('calculateQuantity: ', this.workTypeItem);
     },
-    // cal(){
-    //   var item = {...this.workTypeItem};
-    //   var quantity = 1;
-    //   quantity = item.length ? item.length * quantity : quantity;
-    //   quantity = item.breadth ? item.breadth * quantity : quantity;
-    //   quantity = item.height ? item.height * quantity : quantity;
-    //   quantity = item.nos ? item.nos * quantity : quantity;
-    //   // this.workTypeItem.quantity = parseFloat(quantity).toFixed(6);
-    //   return quantity;
-    // }
   }
 }
 </script>
