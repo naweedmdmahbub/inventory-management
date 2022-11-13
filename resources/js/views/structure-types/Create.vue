@@ -18,6 +18,7 @@ export default {
         workTypes: [{
           name: '',
           structure_type_id: null,
+          total: null,
           workTypeItems: [{
             work_type_id: null,
             element_type_id: 1,

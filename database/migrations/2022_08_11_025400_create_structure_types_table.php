@@ -17,6 +17,7 @@ class CreateStructureTypesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->unsignedBigInteger('element_type_id');
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@
       <el-row :gutter="20">
           <el-col :span="11" :offset="1">
             <el-form-item :label="$t('work.workTypeItem')" prop="name">
-              <el-input v-model="workTypeItem.name" :placeholder="$t('work.breadth')" />
+              <el-input v-model="workTypeItem.name" :placeholder="$t('work.workTypeItem')" />
             </el-form-item>
           </el-col>
           <el-col :span="11" :offset="1">

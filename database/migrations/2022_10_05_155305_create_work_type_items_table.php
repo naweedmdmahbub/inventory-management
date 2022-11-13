@@ -24,6 +24,7 @@ class CreateWorkTypeItemsTable extends Migration
             $table->float('length')->nullable();
             $table->float('breadth')->nullable();
             $table->float('height')->nullable();
+            $table->float('weight')->nullable();
             $table->float('quantity')->nullable();
             $table->float('total')->nullable();
 

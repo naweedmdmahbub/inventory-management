@@ -6,13 +6,19 @@
       </el-form-item>
       
 
+                  <!-- :key="'workTypeItem-'+index" -->
       <template v-for="(workTypeItem,index) in workType.workTypeItems">
-        <component :is="selectedElementType" 
-                  :key="'workTypeItem-'+index"
+        <component :is="selectedElementType"
+                  :key="childKey+'-workTypeItem-'+index"
                   :workTypeItem="workTypeItem"
                   :workType="workType"
                   :structureType="structureType"
                   :mode="mode" />
+        <!-- <building-element :key="childKey+'-workTypeItem-'+index"
+                  :workTypeItem="workTypeItem"
+                  :workType="workType"
+                  :structureType="structureType"
+                  :mode="mode" /> -->
       </template>
       <el-button v-if="mode !== 'view'" type="info" @click="addItem">Add Work Type Item</el-button>
 
@@ -22,12 +28,12 @@
 
 
 <script>
-import WorkTypeItemComponent from './workTypeItemComponent';
+// import WorkTypeItemComponent from './WorkTypeItemComponent';
 import RodElement from './RodElement';
 import BuildingElement from './BuildingElement';
 import PileElement from './PileElement';
 export default {
-  components: { WorkTypeItemComponent, RodElement, BuildingElement, PileElement },
+  components: { RodElement, BuildingElement, PileElement },
   // props: ['structureType', 'workType', 'mode', 'selectedElement'],
   props: ['structureType', 'workType', 'mode', 'selectedElementType'],
   data() {
@@ -35,6 +41,7 @@ export default {
       RodElementTypeItem: null,
       BuildingElementTypeItem: null,
       PileElementTypeItem: null,
+      childKey: null,
     }
   },
   async created(){
@@ -90,26 +97,30 @@ export default {
         total_weight: null,
         remarks: null,
     };
-    // console.log('workType create:', this.workType, this.structureType);
+    this.childKey = this.$vnode.key;
+    console.log('workType create:', this.workType, this.structureType, this.$vnode.key);
   },
   
   methods: {
     addItem(){
-      var elementType;
+      console.log('this.BuildingElementTypeItem:', this.BuildingElementTypeItem);
+      var elementTypeItem;
       switch (this.structureType.element_type_id){
         case 1:
-          elementType = { ...this.BuildingElementTypeItem };
-          this.workType.workTypeItems.push(elementType);
+          elementTypeItem = { ...this.BuildingElementTypeItem };
+          this.workType.workTypeItems.push(elementTypeItem);
+          console.log('addItem this.workType.workTypeItems:', elementTypeItem, this.workType.workTypeItems);
           break;
         case 2:
-          elementType = { ...this.RodElementTypeItem };
-          this.workType.workTypeItems.push(elementType);
+          elementTypeItem = { ...this.RodElementTypeItem };
+          this.workType.workTypeItems.push(elementTypeItem);
           break;
         case 3:
-          elementType = { ...this.PileElementTypeItem };
-          this.workType.workTypeItems.push(elementType);
+          elementTypeItem = { ...this.PileElementTypeItem };
+          this.workType.workTypeItems.push(elementTypeItem);
           break;
       }
+      console.log('AddItem WorkTypeCOmponent: ', this.workType);
     },
   }
 }

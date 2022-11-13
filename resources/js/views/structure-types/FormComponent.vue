@@ -3,7 +3,7 @@
     <el-form
       ref="structureTypeForm"
       :model="structureType"
-      label-width="150px"
+      label-width="250px"
     >
       <el-form-item :label="$t('common.name')" prop="name">
         <el-input v-model="structureType.name" :disabled="mode === 'view'" />
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import WorkTypeComponent from './components/workTypeComponent';
+import WorkTypeComponent from './components/WorkTypeComponent';
 import axios from 'axios';
 import { showErrors } from '@/utils/helper.js'
 export default {
@@ -69,11 +69,10 @@ export default {
       console.log(data);
       this.elements = data[0];
       this.isMounted = true;
-      console.log('FormComponent mounted', this.elements, this.isMounted);
+      // console.log('FormComponent mounted', this.elements, this.isMounted);
     });
   },
   async created(){
-    
     this.BuildingElementType = {
         name: '',
         structure_type_id: null,
@@ -87,8 +86,8 @@ export default {
           length: null,
           breadth: null,
           height: null,
-          
-          weight: null,
+
+          unit_id: null,
           quantity: null,
           total: null,
         }]
@@ -139,7 +138,7 @@ export default {
           remarks: null,
         }]
     };
-    console.log('structureType create:', this.structureType);
+    // console.log('structureType create:', this.structureType);
   },
   
   methods: {
@@ -182,17 +181,36 @@ export default {
       }
     },
     addItem(){
+      // switch (this.structureType.element_type_id){
+      //   case 1:
+      //     this.structureType.workTypes.push(this.BuildingElementType);
+      //     this.selectedElementType = 'BuildingElement';
+      //     break;
+      //   case 2:
+      //     this.structureType.workTypes.push(this.RodElementType);
+      //     this.selectedElementType = 'RodElement';
+      //     break;
+      //   case 3:
+      //     this.structureType.workTypes.push(this.PileElementType);
+      //     this.selectedElementType = 'PileElement';
+      //     break;
+      // }
+      
+      var obj;
       switch (this.structureType.element_type_id){
         case 1:
-          this.structureType.workTypes.push(this.BuildingElementType);
+          obj = { ...this.BuildingElementType };
+          this.structureType.workTypes.push(obj);
           this.selectedElementType = 'BuildingElement';
           break;
         case 2:
-          this.structureType.workTypes.push(this.RodElementType);
+          obj = { ...this.RodElementType };
+          this.structureType.workTypes.push(obj);
           this.selectedElementType = 'RodElement';
           break;
         case 3:
-          this.structureType.workTypes.push(this.PileElementType);
+          obj = { ...this.PileElementType };
+          this.structureType.workTypes.push(obj);
           this.selectedElementType = 'PileElement';
           break;
       }

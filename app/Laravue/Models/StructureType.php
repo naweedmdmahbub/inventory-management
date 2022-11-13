@@ -10,14 +10,14 @@ class StructureType extends Model
 {
     use HasFactory, LogsActivity;
     protected $guard_name = 'api';
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'element_type_id'];
 
     public function workTypes(){
         return $this->hasMany(WorkType::class);
     }
 
     // Activity Logs begins
-    protected static $logAttributes = ['name', 'description'];
+    protected static $logAttributes = ['name', 'description', 'element_type_id'];
     protected static $logOnlyDirty = true;
     public function getDescriptionForEvent(string $eventName): string
     {

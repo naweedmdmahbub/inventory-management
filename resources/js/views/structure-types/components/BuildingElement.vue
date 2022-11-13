@@ -4,7 +4,7 @@
       <el-row :gutter="20">
           <el-col :span="11" :offset="1">
             <el-form-item :label="$t('work.workTypeItem')" prop="name">
-              <el-input v-model="workTypeItem.name" :placeholder="$t('work.breadth')" />
+              <el-input v-model="workTypeItem.name" :placeholder="$t('work.workTypeItem')" />
             </el-form-item>
           </el-col>
           <el-col :span="11" :offset="1">
@@ -73,13 +73,11 @@ export default {
   async mounted(){
     let models = ['Unit'];
     await axios.post('/api/get-model-data', models).then(({ data }) => {
-      console.log(data);
       this.units = data[0];
-      console.log('mounted', this.units);
     });
   },
   async created(){
-    console.log('workTypeItem create:', this.structureType);
+    console.log('workTypeItem create:', this.structureType, this.workTypeItem);
   },
   
   methods: {
@@ -93,6 +91,7 @@ export default {
       this.workTypeItem.quantity = parseFloat(quantity).toFixed(6);
       // this.workTypeItem.quantity = parseFloat(this.workTypeItem.length * this.workTypeItem.breadth * this.workTypeItem.height * this.workTypeItem.nos).toFixed(6);
       console.log('calculateQuantity: ', this.workTypeItem);
+      // this.$emit('quantityCalculated');
     },
   }
 }

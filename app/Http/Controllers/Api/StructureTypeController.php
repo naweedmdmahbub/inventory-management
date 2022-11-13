@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StructureTypeStoreUpdateRequest;
 use App\Http\Resources\StructureTypeResource;
 use App\Laravue\Models\StructureType;
+use App\Laravue\Models\WorkType;
+use App\Laravue\Models\WorkTypeItem;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -42,11 +44,56 @@ class StructureTypeController extends Controller
      */
     public function store(StructureTypeStoreUpdateRequest $request)
     {
-        dd($request->all());
+        // dd($request->all());
         try {
-            $input = $request->only('name', 'client_id', 'code', 'location', 'description', 'start_date', 'end_date');
+            $structureTypeInput = $request->only('name', 'description', 'element_type_id');
             DB::beginTransaction();
-            $structureType = StructureType::create($input);
+            $structureType = StructureType::create($structureTypeInput);
+            foreach($request->workTypes as $workTypeInput){
+                $workType['name'] = $workTypeInput['name'];
+                $workType['total'] = isset($workTypeInput['total']) ? $workTypeInput['total'] :null;
+                $workType['structure_type_id'] = $structureType->id;
+                // dd($workTypeInput);
+                $workType = WorkType::create($workType);
+                foreach($workTypeInput['workTypeItems'] as $workTypeItemInput){
+                    $workTypeItem['work_type_id'] = $workType->id;
+                    $workTypeItem['element_type_id'] = $workTypeItemInput['element_type_id'];
+                    $workTypeItem['unit_id'] = $workTypeItemInput['unit_id'];
+
+                    $workTypeItem['name'] = $workTypeItemInput['name'] ? $workTypeItemInput['name'] :null;
+                    $workTypeItem['description'] = $workTypeItemInput['description'] ? $workTypeItemInput['description'] :null;
+
+                    $workTypeItem['nos'] = isset($workTypeItemInput['nos']) ? $workTypeItemInput['nos'] :null;
+                    $workTypeItem['length'] = isset($workTypeItemInput['length']) ? $workTypeItemInput['length'] :null;
+                    $workTypeItem['breadth'] = isset($workTypeItemInput['breadth']) ? $workTypeItemInput['breadth'] :null;
+                    $workTypeItem['height'] = isset($workTypeItemInput['height']) ? $workTypeItemInput['height'] :null;
+                    $workTypeItem['weight'] = isset($workTypeItemInput['weight']) ? $workTypeItemInput['weight'] :null;
+                    $workTypeItem['quantity'] = isset($workTypeItemInput['quantity']) ? $workTypeItemInput['quantity'] :null;
+                    $workTypeItem['total'] = isset($workTypeItemInput['total']) ? $workTypeItemInput['total'] :null;
+                    
+                    $workTypeItem['dia'] = isset($workTypeItemInput['dia']) ? $workTypeItemInput['dia'] :null;
+                    $workTypeItem['rod_length'] = isset($workTypeItemInput['rod_length']) ? $workTypeItemInput['rod_length'] :null;
+                    $workTypeItem['lap'] = isset($workTypeItemInput['lap']) ? $workTypeItemInput['lap'] :null;
+                    $workTypeItem['matam'] = isset($workTypeItemInput['matam']) ? $workTypeItemInput['matam'] : null;
+                    $workTypeItem['cutting_length'] = isset($workTypeItemInput['cutting_length']) ? $workTypeItemInput['cutting_length'] : null;
+                    $workTypeItem['item'] = isset($workTypeItemInput['item']) ? $workTypeItemInput['item'] : null;
+                    $workTypeItem['layer'] = isset($workTypeItemInput['layer']) ? $workTypeItemInput['layer'] : null;
+                    $workTypeItem['total_length'] = isset($workTypeItemInput['total_length']) ? $workTypeItemInput['total_length'] : null;
+                    $workTypeItem['unit_weight'] = isset($workTypeItemInput['unit_weight']) ? $workTypeItemInput['unit_weight'] : null;
+                    $workTypeItem['total_weight'] = isset($workTypeItemInput['total_weight']) ? $workTypeItemInput['total_weight'] : null;
+
+                    $workTypeItem['pile'] = isset($workTypeItemInput['pile']) ? $workTypeItemInput['pile'] :null;
+                    $workTypeItem['pile_dia'] = isset($workTypeItemInput['pile_dia']) ? $workTypeItemInput['pile_dia'] :null;
+                    $workTypeItem['bar_dia'] = isset($workTypeItemInput['bar_dia']) ? $workTypeItemInput['bar_dia'] :null;
+                    $workTypeItem['rebar_num'] = isset($workTypeItemInput['rebar_num']) ? $workTypeItemInput['rebar_num'] :null;
+                    $workTypeItem['laping'] = isset($workTypeItemInput['laping']) ? $workTypeItemInput['laping'] :null;
+                    $workTypeItem['actual_length'] = isset($workTypeItemInput['actual_length']) ? $workTypeItemInput['actual_length'] :null;
+                    $workTypeItem['remarks'] = isset($workTypeItemInput['remarks']) ? $workTypeItemInput['remarks'] :null;
+
+                    // dd($workTypeItem);
+                    WorkTypeItem::create($workTypeItem);
+                }    
+            }
             DB::commit();
             return new StructureTypeResource($structureType);
         } catch (Exception $ex) {
