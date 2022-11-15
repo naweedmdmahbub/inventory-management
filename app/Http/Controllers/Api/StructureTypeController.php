@@ -50,11 +50,11 @@ class StructureTypeController extends Controller
             DB::beginTransaction();
             $structureType = StructureType::create($structureTypeInput);
             foreach($request->workTypes as $workTypeInput){
-                $workType['name'] = $workTypeInput['name'];
-                $workType['total'] = isset($workTypeInput['total']) ? $workTypeInput['total'] :null;
-                $workType['structure_type_id'] = $structureType->id;
-                // dd($workTypeInput);
-                $workType = WorkType::create($workType);
+                $workTypeArr['name'] = $workTypeInput['name'];
+                $workTypeArr['total'] = isset($workTypeInput['total']) ? $workTypeInput['total'] :null;
+                $workTypeArr['structure_type_id'] = $structureType->id;
+                // dd($workType);
+                $workType = WorkType::create($workTypeArr);
                 foreach($workTypeInput['workTypeItems'] as $workTypeItemInput){
                     $workTypeItem['work_type_id'] = $workType->id;
                     $workTypeItem['element_type_id'] = $workTypeItemInput['element_type_id'];

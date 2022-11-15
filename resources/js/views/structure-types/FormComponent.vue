@@ -66,7 +66,7 @@ export default {
   async mounted(){
     var models = ['ElementType'];
     await axios.post('/api/get-model-data', models).then(({ data }) => {
-      console.log(data);
+      // console.log(data);
       this.elements = data[0];
       this.isMounted = true;
       // console.log('FormComponent mounted', this.elements, this.isMounted);
@@ -181,35 +181,21 @@ export default {
       }
     },
     addItem(){
-      // switch (this.structureType.element_type_id){
-      //   case 1:
-      //     this.structureType.workTypes.push(this.BuildingElementType);
-      //     this.selectedElementType = 'BuildingElement';
-      //     break;
-      //   case 2:
-      //     this.structureType.workTypes.push(this.RodElementType);
-      //     this.selectedElementType = 'RodElement';
-      //     break;
-      //   case 3:
-      //     this.structureType.workTypes.push(this.PileElementType);
-      //     this.selectedElementType = 'PileElement';
-      //     break;
-      // }
       
       var obj;
       switch (this.structureType.element_type_id){
         case 1:
-          obj = { ...this.BuildingElementType };
+          obj = JSON.parse(JSON.stringify(this.BuildingElementType));
           this.structureType.workTypes.push(obj);
           this.selectedElementType = 'BuildingElement';
           break;
         case 2:
-          obj = { ...this.RodElementType };
+          obj = JSON.parse(JSON.stringify(this.RodElementType));
           this.structureType.workTypes.push(obj);
           this.selectedElementType = 'RodElement';
           break;
         case 3:
-          obj = { ...this.PileElementType };
+          obj = JSON.parse(JSON.stringify(this.PileElementType));
           this.structureType.workTypes.push(obj);
           this.selectedElementType = 'PileElement';
           break;

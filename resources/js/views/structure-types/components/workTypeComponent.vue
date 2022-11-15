@@ -4,9 +4,7 @@
       <el-form-item :label="$t('work.workType')" prop="name">
         <el-input v-model="workType.name" :disabled="mode === 'view'" />
       </el-form-item>
-      
 
-                  <!-- :key="'workTypeItem-'+index" -->
       <template v-for="(workTypeItem,index) in workType.workTypeItems">
         <component :is="selectedElementType"
                   :key="childKey+'-workTypeItem-'+index"
@@ -14,11 +12,6 @@
                   :workType="workType"
                   :structureType="structureType"
                   :mode="mode" />
-        <!-- <building-element :key="childKey+'-workTypeItem-'+index"
-                  :workTypeItem="workTypeItem"
-                  :workType="workType"
-                  :structureType="structureType"
-                  :mode="mode" /> -->
       </template>
       <el-button v-if="mode !== 'view'" type="info" @click="addItem">Add Work Type Item</el-button>
 
@@ -34,7 +27,6 @@ import BuildingElement from './BuildingElement';
 import PileElement from './PileElement';
 export default {
   components: { RodElement, BuildingElement, PileElement },
-  // props: ['structureType', 'workType', 'mode', 'selectedElement'],
   props: ['structureType', 'workType', 'mode', 'selectedElementType'],
   data() {
     return {
@@ -44,8 +36,7 @@ export default {
       childKey: null,
     }
   },
-  async created(){
-    
+  async created(){    
     this.BuildingElementTypeItem = {
         work_type_id: null,
         element_type_id: 1,
@@ -103,24 +94,23 @@ export default {
   
   methods: {
     addItem(){
-      console.log('this.BuildingElementTypeItem:', this.BuildingElementTypeItem);
+      console.log('this.BuildingElementTypeItem before adding in WorkTypeComp:', this.BuildingElementTypeItem, this.structureType);
       var elementTypeItem;
       switch (this.structureType.element_type_id){
         case 1:
-          elementTypeItem = { ...this.BuildingElementTypeItem };
+          elementTypeItem = JSON.parse(JSON.stringify(this.BuildingElementTypeItem));
           this.workType.workTypeItems.push(elementTypeItem);
           console.log('addItem this.workType.workTypeItems:', elementTypeItem, this.workType.workTypeItems);
           break;
         case 2:
-          elementTypeItem = { ...this.RodElementTypeItem };
+          elementTypeItem = JSON.parse(JSON.stringify(this.RodElementTypeItem));
           this.workType.workTypeItems.push(elementTypeItem);
           break;
         case 3:
-          elementTypeItem = { ...this.PileElementTypeItem };
+          elementTypeItem = JSON.parse(JSON.stringify(this.PileElementTypeItem));
           this.workType.workTypeItems.push(elementTypeItem);
           break;
       }
-      console.log('AddItem WorkTypeCOmponent: ', this.workType);
     },
   }
 }

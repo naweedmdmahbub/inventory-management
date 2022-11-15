@@ -31,7 +31,7 @@ const projectRoutes = {
       path: 'projects/create',
       component: () => import('@/views/projects/Create'),
       name: 'CreateProject',
-      meta: { title: 'createProject', permissions: ['add project'] },
+      meta: { title: 'createProject', noCache: true, permissions: ['add project'] },
       hidden: true,
     },
     {

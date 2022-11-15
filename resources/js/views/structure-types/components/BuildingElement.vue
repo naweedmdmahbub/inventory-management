@@ -89,9 +89,7 @@ export default {
       quantity = this.workTypeItem.height ? this.workTypeItem.height * quantity : quantity;
       quantity = this.workTypeItem.nos ? this.workTypeItem.nos * quantity : quantity;
       this.workTypeItem.quantity = parseFloat(quantity).toFixed(6);
-      // this.workTypeItem.quantity = parseFloat(this.workTypeItem.length * this.workTypeItem.breadth * this.workTypeItem.height * this.workTypeItem.nos).toFixed(6);
       console.log('calculateQuantity: ', this.workTypeItem);
-      // this.$emit('quantityCalculated');
     },
   }
 }

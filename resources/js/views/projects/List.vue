@@ -59,7 +59,8 @@
       </el-table-column>
       <el-table-column prop="description" align="center" sortable label="Description" width="200">
         <template slot-scope="scope">
-          <span>{{ scope.row.description.length &lt; 50 ? scope.row.description : scope.row.description.substring(0, 50) +'...' }}</span>
+          <span>{{ scope.row.description && scope.row.description.length &lt;50 ? scope.row.description 
+                      : (scope.row.description ? scope.row.description.substring(0, 50) +'...' : null) }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="start_date" align="center" sortable label="Start Date">

@@ -41,12 +41,6 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="client_name" align="center" sortable label="Client">
-        <template slot-scope="scope">
-          <span>{{ scope.row.client_name }}</span>
-        </template>
-      </el-table-column>
-
       <el-table-column prop="description" align="center" sortable label="Description" width="200">
         <template slot-scope="scope">
           <span>{{ scope.row.description.length &lt; 50 ? scope.row.description : scope.row.description.substring(0, 50) +'...' }}</span>
