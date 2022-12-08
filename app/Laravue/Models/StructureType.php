@@ -15,6 +15,9 @@ class StructureType extends Model
     public function workTypes(){
         return $this->hasMany(WorkType::class);
     }
+    public function elementType(){
+        return $this->belongsTo(ElementType::class);
+    }
 
     // Activity Logs begins
     protected static $logAttributes = ['name', 'description', 'element_type_id'];

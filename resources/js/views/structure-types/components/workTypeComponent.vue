@@ -1,6 +1,6 @@
 <template>
-  <tr>
-    <td>
+  <el-card class="box" :body-style="{ padding: '5px' }">
+    <div>
       <el-form-item :label="$t('work.workType')" prop="name">
         <el-input v-model="workType.name" :disabled="mode === 'view'" />
       </el-form-item>
@@ -14,9 +14,9 @@
                   :mode="mode" />
       </template>
       <el-button v-if="mode !== 'view'" type="info" @click="addItem">Add Work Type Item</el-button>
-
-    </td>
-  </tr>
+      <el-button type="danger" @click.prevent="removeWorkType(workType)">Delete</el-button>
+    </div>
+  </el-card>
 </template>
 
 
@@ -40,7 +40,7 @@ export default {
     this.BuildingElementTypeItem = {
         work_type_id: null,
         element_type_id: 1,
-        name: '',
+        // name: '',
         description: '',
         nos: null,
 
@@ -55,7 +55,7 @@ export default {
     this.RodElementTypeItem = {
         work_type_id: null,
         element_type_id: 2,
-        name: '',
+        // name: '',
         description: '',
 
         dia: 10,
@@ -73,7 +73,7 @@ export default {
     this.PileElementTypeItem = {
         work_type_id: null,
         element_type_id: 3,
-        name: '',
+        // name: '',
         
         pile: null,
         pile_dia: null,
@@ -89,12 +89,12 @@ export default {
         remarks: null,
     };
     this.childKey = this.$vnode.key;
-    console.log('workType create:', this.workType, this.structureType, this.$vnode.key);
+    // console.log('workType create:', this.workType, this.structureType, this.$vnode.key);
   },
   
   methods: {
     addItem(){
-      console.log('this.BuildingElementTypeItem before adding in WorkTypeComp:', this.BuildingElementTypeItem, this.structureType);
+      // console.log('this.BuildingElementTypeItem before adding in WorkTypeComp:', this.BuildingElementTypeItem, this.structureType);
       var elementTypeItem;
       switch (this.structureType.element_type_id){
         case 1:
@@ -112,19 +112,19 @@ export default {
           break;
       }
     },
+    removeWorkType(item) {
+      var index = this.structureType.workTypes.indexOf(item);
+      console.log('removeWorkType ', this.workType, item, index);
+      this.structureType.workTypes.splice(index, 1);
+    },
   }
 }
 </script>
 
 <style scoped>
-  td {
-    /* box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); */
-    border: .5px solid;
-    padding: 8px;
-    margin: 5px;
+  .box {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    border: .5px solid blue;
+    margin: 10px;
   }
-  tr {
-    margin: 5px;
-  }
-
 </style>

@@ -1,13 +1,8 @@
 <template>
-  <tr>
-    <td>
+  <div>
+    <div class="box">
       <el-row :gutter="20">
-          <el-col :span="11" :offset="1">
-            <el-form-item :label="$t('work.workTypeItem')" prop="name">
-              <el-input v-model="workTypeItem.name" :placeholder="$t('work.workTypeItem')" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="11" :offset="1">
+          <el-col :span="23" :offset="1">
               <el-form-item :label="$t('common.description')" prop="description">
                   <el-input v-model="workTypeItem.description" type="textarea" :placeholder="$t('common.description')" />
               </el-form-item>
@@ -86,8 +81,8 @@
           </el-col>
       </el-row>
       
-    </td>
-  </tr>
+    </div>
+  </div>
 </template>
 
 
@@ -129,10 +124,10 @@ export default {
 </script>
 
 <style scoped>
-  td {
+  .box {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     border: .2px solid;
-    padding: 8px;
-    margin: 5px;
+    padding: 2px;
+    margin: 2px;
   }
 </style>

@@ -18,6 +18,7 @@ class StructureTypeResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'element_name' => $this->elementType->name,
         ];
     }
 }

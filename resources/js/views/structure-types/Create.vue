@@ -22,7 +22,7 @@ export default {
           workTypeItems: [{
             work_type_id: null,
             element_type_id: 1,
-            name: '',
+            // name: '',
             description: '',
             nos: null,
 

@@ -3,7 +3,7 @@
     <el-form
       ref="structureTypeForm"
       :model="structureType"
-      label-width="250px"
+      label-width="120px"
     >
       <el-form-item :label="$t('common.name')" prop="name">
         <el-input v-model="structureType.name" :disabled="mode === 'view'" />
@@ -79,7 +79,7 @@ export default {
         workTypeItems: [{
           work_type_id: null,
           element_type_id: 1,
-          name: '',
+          // name: '',
           description: '',
           nos: null,
 
@@ -99,7 +99,7 @@ export default {
         workTypeItems: [{
           work_type_id: null,
           element_type_id: 2,
-          name: '',
+          // name: '',
           description: '',
 
           dia: 10,
@@ -122,7 +122,7 @@ export default {
         workTypeItems: [{
           work_type_id: null,
           element_type_id: 3,
-          name: '',
+          // name: '',
           
           pile: null,
           pile_dia: null,
@@ -181,7 +181,6 @@ export default {
       }
     },
     addItem(){
-      
       var obj;
       switch (this.structureType.element_type_id){
         case 1:
@@ -205,7 +204,7 @@ export default {
       this.structureType.workTypes = [];
       this.addItem();
       console.log('changeElementTypeID', this);
-    }
+    },
   },
 }
 </script>

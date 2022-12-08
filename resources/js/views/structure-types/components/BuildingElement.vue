@@ -1,20 +1,24 @@
 <template>
-  <tr>
-    <td>
-      <el-row :gutter="20">
-          <el-col :span="11" :offset="1">
-            <el-form-item :label="$t('work.workTypeItem')" prop="name">
-              <el-input v-model="workTypeItem.name" :placeholder="$t('work.workTypeItem')" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="11" :offset="1">
+    <div class="box">
+      <el-row :gutter="5">
+          <el-col :span="15" :offset="1">
               <el-form-item :label="$t('common.description')" prop="description">
                   <el-input v-model="workTypeItem.description" type="textarea" :placeholder="$t('common.description')" />
               </el-form-item>
           </el-col>
+          <el-col :span="7" :offset="1">
+            <el-form-item :label="$t('common.unit_id')" prop="unit_id">
+              <el-select v-model="workTypeItem.unit_id" placeholder="Please Select Unit" :disabled="mode === 'view'" width="100%">
+                  <el-option v-for="unit in units"
+                            :key="unit.id"
+                            :label="unit.name"
+                            :value="unit.id" />
+              </el-select>
+            </el-form-item>
+          </el-col>
       </el-row>
 
-      <el-row :gutter="20">
+      <el-row :gutter="5">
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.length')" prop="length">
                   <el-input v-model="workTypeItem.length" :placeholder="$t('work.length')" @change="calculateQuantity" />
@@ -33,17 +37,7 @@
       </el-row>
 
               
-      <el-row :gutter="20">
-          <el-col :span="7" :offset="1">
-            <el-form-item :label="$t('common.unit_id')" prop="unit_id">
-              <el-select v-model="workTypeItem.unit_id" placeholder="Please Select Unit" :disabled="mode === 'view'" width="100%">
-                  <el-option v-for="unit in units"
-                            :key="unit.id"
-                            :label="unit.name"
-                            :value="unit.id" />
-              </el-select>
-            </el-form-item>
-          </el-col>
+      <el-row :gutter="5">
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.nos')" prop="nos">
                   <el-input v-model="workTypeItem.nos" :placeholder="$t('work.nos')" @change="calculateQuantity" />
@@ -54,17 +48,21 @@
                   <el-input v-model="workTypeItem.quantity" :disabled="true" :placeholder="$t('work.quantity')" />
               </el-form-item>
           </el-col>
+          <el-col :span="7" :offset="1">
+              <el-form-item>
+                <el-button type="danger" @click.prevent="removeBuildingElement(workTypeItem)">Delete</el-button>
+              </el-form-item>
+          </el-col>
       </el-row>
       
-    </td>
-  </tr>
+    </div>
 </template>
 
 
 <script>
 import axios from 'axios';
 export default {
-  props: ['structureType', 'workTypeItem', 'mode'],
+  props: ['structureType', 'workTypeItem', 'mode', 'workType'],
   data() {
     return {
       units: [],
@@ -77,29 +75,34 @@ export default {
     });
   },
   async created(){
-    console.log('workTypeItem create:', this.structureType, this.workTypeItem);
+    // console.log('workTypeItem create:', this.structureType, this.workTypeItem);
   },
   
   methods: {
     async calculateQuantity(){
-      console.log('calculateQuantity item: ', this.workTypeItem);
+      // console.log('calculateQuantity item: ', this.workTypeItem);
       let quantity = 1;
       quantity = this.workTypeItem.length ? this.workTypeItem.length * quantity : quantity;
       quantity = this.workTypeItem.breadth ? this.workTypeItem.breadth * quantity : quantity;
       quantity = this.workTypeItem.height ? this.workTypeItem.height * quantity : quantity;
       quantity = this.workTypeItem.nos ? this.workTypeItem.nos * quantity : quantity;
       this.workTypeItem.quantity = parseFloat(quantity).toFixed(6);
-      console.log('calculateQuantity: ', this.workTypeItem);
+      // console.log('calculateQuantity: ', this.workTypeItem);
+    },
+    removeBuildingElement(item) {
+      var index = this.workType.workTypeItems.indexOf(item);
+      console.log('removeBuildingElement: ', this.workType, item, index);
+      this.workType.workTypeItems.splice(index, 1);
     },
   }
 }
 </script>
 
 <style scoped>
-  td {
+  .box {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     border: .2px solid;
-    padding: 8px;
-    margin: 5px;
+    padding: 2px;
+    margin: 2px;
   }
 </style>

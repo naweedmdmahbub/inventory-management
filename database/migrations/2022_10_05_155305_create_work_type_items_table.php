@@ -17,7 +17,6 @@ class CreateWorkTypeItemsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('work_type_id');
             $table->unsignedBigInteger('element_type_id');
-            $table->text('name');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('unit_id')->nullable();
             $table->integer('nos')->nullable();
@@ -25,8 +24,8 @@ class CreateWorkTypeItemsTable extends Migration
             $table->float('breadth')->nullable();
             $table->float('height')->nullable();
             $table->float('weight')->nullable();
-            $table->float('quantity')->nullable();
-            $table->float('total')->nullable();
+            $table->double('quantity')->nullable();
+            $table->double('total')->nullable();
 
             $table->float('dia')->nullable();
             $table->float('rod_length')->nullable();
@@ -35,9 +34,9 @@ class CreateWorkTypeItemsTable extends Migration
             $table->float('cutting_length')->nullable();
             $table->integer('item')->nullable();
             $table->integer('layer')->nullable();
-            $table->float('total_length')->nullable();
+            $table->double('total_length')->nullable();
             $table->float('unit_weight')->nullable();
-            $table->float('total_weight')->nullable();
+            $table->double('total_weight')->nullable();
             
             $table->float('pile')->nullable();
             $table->float('pile_dia')->nullable();

@@ -43,12 +43,22 @@
 
       <el-table-column prop="description" align="center" sortable label="Description" width="200">
         <template slot-scope="scope">
-          <span>{{ scope.row.description.length &lt; 50 ? scope.row.description : scope.row.description.substring(0, 50) +'...' }}</span>
+          <span>{{ scope.row.description ? 
+                      scope.row.description.length &lt; 50 ? scope.row.description : scope.row.description.substring(0, 50) +'...' 
+                      : null
+                }}
+          </span>
+        </template>
+      </el-table-column>
+
+      <el-table-column prop="element_name" align="center" sortable label="Element Name">
+        <template slot-scope="scope">
+          <span>{{ scope.row.element_name }}</span>
         </template>
       </el-table-column>
 
       <el-table-column align="center" label="Actions">
-        <template slot-scope="scope">          
+        <template slot-scope="scope">
           <router-link v-if="checkPermission(['manage structure type'])" :to="'/project/structure-types/view/'+scope.row.id">
             <el-button
               v-permission="['manage structure type']"
