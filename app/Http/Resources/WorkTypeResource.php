@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StructureTypeResource extends JsonResource
+class WorkTypeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,10 +17,8 @@ class StructureTypeResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'description' => $this->description,
-            'element_type_id' => $this->elementType->id,
-            'element_name' => $this->elementType->name,
-            'workTypes' => WorkTypeResource::collection($this->whenLoaded('workTypes')),
+            'structure_type_id' => $this->structure_type_id,
+            'workTypeItems' => WorkTypeItemResource::collection($this->whenLoaded('workTypeItems')),
         ];
     }
 }

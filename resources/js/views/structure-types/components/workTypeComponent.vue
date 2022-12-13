@@ -10,6 +10,7 @@
                   :key="childKey+'-workTypeItem-'+index"
                   :workTypeItem="workTypeItem"
                   :workType="workType"
+                  :units="units"
                   :structureType="structureType"
                   :mode="mode" />
       </template>
@@ -27,7 +28,7 @@ import BuildingElement from './BuildingElement';
 import PileElement from './PileElement';
 export default {
   components: { RodElement, BuildingElement, PileElement },
-  props: ['structureType', 'workType', 'mode', 'selectedElementType'],
+  props: ['structureType', 'workType', 'mode', 'selectedElementType', 'units'],
   data() {
     return {
       RodElementTypeItem: null,
@@ -50,7 +51,6 @@ export default {
         
         unit_id: null,
         quantity: null,
-        total: null,
     };
     this.RodElementTypeItem = {
         work_type_id: null,
@@ -74,6 +74,7 @@ export default {
         work_type_id: null,
         element_type_id: 3,
         // name: '',
+        description: '',
         
         pile: null,
         pile_dia: null,

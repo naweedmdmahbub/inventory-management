@@ -79,21 +79,14 @@
 
 
 <script>
-import axios from 'axios';
 export default {
-  props: ['structureType', 'workTypeItem', 'mode'],
+  props: ['structureType', 'workTypeItem', 'mode', 'units'],
   data() {
     return {
-      units: [],
+    //   units: [],
     }
   },
   async mounted(){
-    var models = ['Unit'];
-    await axios.post('/api/get-model-data', models).then(({ data }) => {
-      console.log(data);
-      this.units = data[0];
-      console.log('mounted', this.units);
-    });
     this.workTypeItem.unit_weight = parseFloat(this.workTypeItem.dia * this.workTypeItem.dia / 162).toFixed(6);
   },
   async created(){

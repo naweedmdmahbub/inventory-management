@@ -60,19 +60,14 @@
 
 
 <script>
-import axios from 'axios';
 export default {
-  props: ['structureType', 'workTypeItem', 'mode', 'workType'],
+  props: ['structureType', 'workTypeItem', 'mode', 'workType', 'units'],
   data() {
     return {
-      units: [],
+      // units: [],
     }
   },
   async mounted(){
-    let models = ['Unit'];
-    await axios.post('/api/get-model-data', models).then(({ data }) => {
-      this.units = data[0];
-    });
   },
   async created(){
     // console.log('workTypeItem create:', this.structureType, this.workTypeItem);
@@ -80,7 +75,6 @@ export default {
   
   methods: {
     async calculateQuantity(){
-      // console.log('calculateQuantity item: ', this.workTypeItem);
       let quantity = 1;
       quantity = this.workTypeItem.length ? this.workTypeItem.length * quantity : quantity;
       quantity = this.workTypeItem.breadth ? this.workTypeItem.breadth * quantity : quantity;

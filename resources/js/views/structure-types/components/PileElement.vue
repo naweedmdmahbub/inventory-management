@@ -87,24 +87,14 @@
 
 
 <script>
-import axios from 'axios';
 export default {
-  props: ['structureType', 'workTypeItem', 'mode'],
+  props: ['structureType', 'workTypeItem', 'mode', 'units'],
   data() {
-    return {
-      units: [],
-    }
+    return {}
   },
-  async mounted(){
-    let models = ['Unit'];
-    await axios.post('/api/get-model-data', models).then(({ data }) => {
-      console.log(data);
-      this.units = data[0];
-      console.log('mounted', this.units);
-    });
-  },
+  async mounted(){},
   async created(){
-    console.log('workTypeItem create:', this.structureType);
+    console.log('Pile workTypeItem create:', this.structureType);
   },
   
   methods: {

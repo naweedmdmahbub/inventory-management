@@ -26,6 +26,7 @@
           :key="'workType-'+index"
           :structureType="structureType"
           :workType="workType"
+          :units="units"
           :mode="mode"
           :selectedElementType="selectedElementType"
         />
@@ -60,14 +61,16 @@ export default {
       BuildingElementType: null,
       PileElementType: null,
       elements: [],
+      units: [],
       isMounted: false,
     }
   },
   async mounted(){
-    var models = ['ElementType'];
+    var models = ['ElementType', 'Unit'];
     await axios.post('/api/get-model-data', models).then(({ data }) => {
       // console.log(data);
       this.elements = data[0];
+      this.units = data[1];
       this.isMounted = true;
       // console.log('FormComponent mounted', this.elements, this.isMounted);
     });
@@ -76,6 +79,7 @@ export default {
     this.BuildingElementType = {
         name: '',
         structure_type_id: null,
+        total: null,
         workTypeItems: [{
           work_type_id: null,
           element_type_id: 1,
@@ -89,7 +93,6 @@ export default {
 
           unit_id: null,
           quantity: null,
-          total: null,
         }]
     };
     this.RodElementType = {

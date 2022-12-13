@@ -19,6 +19,9 @@ class WorkTypeItem extends Model
     public function workType(){
         return $this->belongsTo(WorkType::class);
     }
+    // public function elementType(){
+    //     return $this->belongsTo(ElementType::class);
+    // }
 
     // Activity Logs begins
     protected static $logAttributes = ['name', 'description', 'work_type_id', 'element_type_id',

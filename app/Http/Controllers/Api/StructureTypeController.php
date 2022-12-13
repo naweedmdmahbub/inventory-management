@@ -28,11 +28,9 @@ class StructureTypeController extends Controller
         $structureTypeQuery = StructureType::with('elementType');
         $limit = Arr::get($searchParams, 'limit', static::ITEM_PER_PAGE);
         $keyword = Arr::get($searchParams, 'keyword', '');
-
         if (!empty($keyword)) {
             $structureTypeQuery->where('name', 'LIKE', '%' . $keyword . '%');
         }
-
         return StructureTypeResource::collection($structureTypeQuery->orderBy('id', 'asc')->paginate($limit));
     }
 
@@ -46,17 +44,12 @@ class StructureTypeController extends Controller
     {
         // dd($request->all());
         // try {
-            $structureType = $request->only('name', 'description', 'element_type_id');
+            $input = $request->only('name', 'description', 'element_type_id');
             // dd($request->input('workTypes'), $request->workTypes);
             // DB::beginTransaction();
-            $structureType = StructureType::create($structureType);
+            $structureType = StructureType::create($input);
             foreach($request->workTypes as $workTypeInput){
                 // dd($workTypeInput);
-                // $workType = WorkType::create([
-                //                 'structure_type_id' => $structureType->id,
-                //                 'name' => $workTypeInput['name'],
-                //                 'total' => isset($workTypeInput['total']) ? $workTypeInput['total'] :null,
-                //             ]);
                 $workType = new WorkType();
                 $workType->name = $workTypeInput['name'];
                 $workType->total = isset($workTypeInput['total']) ? $workTypeInput['total'] :null;
@@ -120,7 +113,8 @@ class StructureTypeController extends Controller
      */
     public function show($id)
     {
-        $structureType = StructureType::find($id);
+        $structureType = StructureType::with('workTypes.workTypeItems')->find($id);
+        // dd($structureType);
         return new StructureTypeResource($structureType);
     }
 
@@ -138,6 +132,7 @@ class StructureTypeController extends Controller
             $input = $request->only('name', 'client_id', 'code', 'location', 'description', 'start_date', 'end_date');
             $structureType = StructureType::find($id);
             DB::beginTransaction();
+
             $structureType->fill($input)->update();
             DB::commit();
             return new StructureTypeResource($structureType);
