@@ -16,8 +16,9 @@ class CreateStructuresTable extends Migration
         Schema::create('structures', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('project_id');
             $table->text('description')->nullable();
+            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('element_type_id');
             $table->timestamps();
         });
     }

@@ -1,0 +1,124 @@
+<template>
+  <div class="box">
+    <el-row :gutter="20">
+        <el-col :span="23" :offset="1">
+            <el-form-item :label="$t('common.description')" prop="description">
+                <el-input v-model="workItem.description" type="textarea" :placeholder="$t('common.description')" />
+            </el-form-item>
+        </el-col>
+    </el-row>
+
+    <el-row :gutter="20">
+        <el-col :span="7" :offset="1">
+            <el-form-item :label="$t('work.dia')" prop="dia">
+                <el-input v-model="workItem.dia" :placeholder="$t('work.dia')" @change="calculateUnitWeight" />
+            </el-form-item>
+        </el-col>
+        <el-col :span="7" :offset="1">
+            <el-form-item :label="$t('work.rod_length')" prop="rod_length">
+                <el-input v-model="workItem.rod_length" :placeholder="$t('work.rod_length')" @change="calculateCuttingLength" />
+            </el-form-item>
+        </el-col>
+        <el-col :span="7" :offset="1">
+            <el-form-item :label="$t('work.lap')" prop="lap">
+                <el-input v-model="workItem.lap" :placeholder="$t('work.lap')" @change="calculateCuttingLength" />
+            </el-form-item>
+        </el-col>
+    </el-row>
+    <el-row :gutter="20">
+        <el-col :span="7" :offset="1">
+            <el-form-item :label="$t('work.matam')" prop="matam">
+                <el-input v-model="workItem.matam" :placeholder="$t('work.matam')" @change="calculateCuttingLength" />
+            </el-form-item>
+        </el-col>
+        <el-col :span="7" :offset="1">
+            <el-form-item :label="$t('work.cutting_length')" prop="cutting_length">
+                <el-input v-model="workItem.cutting_length" :disabled="true" :placeholder="$t('work.cutting_length')" />
+            </el-form-item>
+        </el-col>
+    </el-row>
+
+            
+    <el-row :gutter="20">
+        <el-col :span="7" :offset="1">
+            <el-form-item :label="$t('work.nos')" prop="nos">
+                <el-input v-model="workItem.nos" :placeholder="$t('work.nos')" @change="calculateCuttingLength" />
+            </el-form-item>
+        </el-col>
+        <el-col :span="7" :offset="1">
+            <el-form-item :label="$t('work.layer')" prop="layer">
+                <el-input v-model="workItem.layer" :placeholder="$t('work.layer')" @change="calculateCuttingLength" />
+            </el-form-item>
+        </el-col>
+        <el-col :span="7" :offset="1">
+            <el-form-item :label="$t('work.item')" prop="item">
+                <el-input v-model="workItem.item" :placeholder="$t('work.item')" @change="calculateCuttingLength" />
+            </el-form-item>
+        </el-col>
+    </el-row>
+    <el-row :gutter="20">
+        <el-col :span="7" :offset="1">
+            <el-form-item :label="$t('work.total_length')" prop="total_length">
+                <el-input v-model="workItem.total_length" :disabled="true" :placeholder="$t('work.total_length')" />
+            </el-form-item>
+        </el-col>
+        <el-col :span="7" :offset="1">
+            <el-form-item :label="$t('work.unit_weight')" prop="unit_weight">
+                <el-input v-model="workItem.unit_weight" :disabled="true" :placeholder="$t('work.unit_weight')" />
+            </el-form-item>
+        </el-col>
+        <el-col :span="7" :offset="1">
+            <el-form-item :label="$t('work.weight')" prop="weight">
+                <el-input v-model="workItem.weight" :disabled="true" :placeholder="$t('work.weight')" />
+            </el-form-item>
+        </el-col>
+    </el-row>
+    
+  </div>
+</template>
+
+
+<script>
+export default {
+  props: ['structure', 'workItem', 'mode', 'units'],
+  data() {
+    return {
+    //   units: [],
+    }
+  },
+  async mounted(){
+    this.workItem.unit_weight = parseFloat(this.workItem.dia * this.workItem.dia / 162).toFixed(6);
+  },
+  async created(){
+    console.log('workItem create:', this.structure);
+  },
+  
+  methods: {
+    calculateUnitWeight(){
+      this.workItem.unit_weight = parseFloat(this.workItem.dia * this.workItem.dia / 162).toFixed(6);
+      this.calculateTotalLength();
+    },
+    calculateCuttingLength(){
+      var item = this.workItem;
+      this.workItem.cutting_length = parseFloat(item.rod_length)+ (parseFloat(item.lap)*(50*16)) + (parseFloat(item.matam)*2);
+      console.log('calculateCuttingLength', item, this, parseFloat(item.dia), (parseFloat(item.lap)+(50*16)));
+      this.calculateTotalLength();
+    },
+    calculateTotalLength(){
+      var item = this.workItem;
+      this.workItem.total_length = parseFloat((item.cutting_length * item.nos * item.layer * item.item) / 1000);
+      this.workItem.weight = parseFloat(item.unit_weight * item.total_length).toFixed(6);
+      console.log('calculateTotalLength: ', this.workItem);
+    }
+  }
+}
+</script>
+
+<style scoped>
+  .box {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    border: .2px solid;
+    padding: 2px;
+    margin: 2px;
+  }
+</style>

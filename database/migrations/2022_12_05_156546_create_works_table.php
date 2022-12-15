@@ -13,16 +13,12 @@ class CreateWorksTable extends Migration
      */
     public function up()
     {
-        Schema::create('works', function (Blueprint $table) {
+        Schema::create('works', function (Blueprint $table) {            
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('client_id');
-            $table->string('code')->nullable();
-            $table->string('location')->nullable();
-            $table->text('description')->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
-            $table->string('status')->nullable();
+            $table->unsignedBigInteger('structure_id');
+            $table->float('total')->nullable();
+            $table->foreign('structure_id')->references('id')->on('structures')->onDelete('cascade');
             $table->timestamps();
         });
     }

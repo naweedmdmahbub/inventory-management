@@ -70,6 +70,36 @@ const projectRoutes = {
       meta: { title: 'structureTypes', noCache: true, icon: 'list', permissions: ['manage structure type'] },
     },
 
+    
+    /** Structure */
+    {
+      path: 'structures/view/:id',
+      component: () => import('@/views/structures/View'),
+      name: 'ViewStructure',
+      meta: { title: 'viewStructure', noCache: true, permissions: ['manage structure'] },
+      hidden: true,
+    },
+    {
+      path: 'structures/edit/:id',
+      component: () => import('@/views/structures/Edit'),
+      name: 'EditStructure',
+      meta: { title: 'editStructure', noCache: true, permissions: ['manage structure'] },
+      hidden: true,
+    },
+    {
+      path: 'structures/create',
+      component: () => import('@/views/structures/Create'),
+      name: 'CreateStructure',
+      meta: { title: 'createStructure', noCache: true, permissions: ['manage structure'] },
+      hidden: true,
+    },
+    {
+      path: 'structures',
+      component: () => import('@/views/structures/List'),
+      name: 'StructureList',
+      meta: { title: 'structureTypes', noCache: true, icon: 'list', permissions: ['manage structure'] },
+    },
+
   ],
 };
 
