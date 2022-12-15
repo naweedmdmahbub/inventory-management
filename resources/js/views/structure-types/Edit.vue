@@ -23,6 +23,8 @@ export default {
       .then(response => {
         console.log('response:', response);
         this.structureType = response.data.data;
+        this.structureType.deletedWorkTypeIDs = [];
+        this.structureType.deletedWorkTypeItemIDs = [];
       });
     this.isMounted = true;
   },

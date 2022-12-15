@@ -15,7 +15,7 @@
                   :mode="mode" />
       </template>
       <el-button v-if="mode !== 'view'" type="info" @click="addItem">Add Work Type Item</el-button>
-      <el-button type="danger" @click.prevent="removeWorkType(workType)">Delete</el-button>
+      <el-button v-if="mode !== 'view'" type="danger" @click.prevent="removeWorkType(workType)">Delete</el-button>
     </div>
   </el-card>
 </template>
@@ -115,7 +115,8 @@ export default {
     },
     removeWorkType(item) {
       var index = this.structureType.workTypes.indexOf(item);
-      console.log('removeWorkType ', this.workType, item, index);
+      console.log('removeWorkType ', this.workType, item, item.id, index);
+      this.structureType.deletedWorkTypeIDs.push(item.id);
       this.structureType.workTypes.splice(index, 1);
     },
   }

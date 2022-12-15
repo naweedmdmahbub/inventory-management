@@ -13,7 +13,7 @@
       </el-form-item>
       <el-form-item :label="$t('work.element')" prop="element_type_id">
         <el-select v-model="structureType.element_type_id" placeholder="Please Select Element"
-                  :disabled="mode === 'view'" width="100%" @change="changeElementTypeID">
+                  :disabled="mode !== 'create'" width="100%" @change="changeElementTypeID">
             <el-option v-for="element in elements"
                       :key="element.id"
                       :label="element.name"
@@ -56,7 +56,6 @@ export default {
   data() {
     return {
       selectedElementType: 'BuildingElement',
-      selectedElementTypeID: null,
       RodElementType: null,
       BuildingElementType: null,
       PileElementType: null,
@@ -148,9 +147,28 @@ export default {
     cancelled(){
       this.$router.push('/project/structure-types');
     },
+
     async handleSubmit() {
-      console.log('handleSubmit:', this.structureType)
-      // this.structureType.element_type_id = this.selectedElementTypeID;
+      if(this.mode === 'edit' && (this.structureType.deletedWorkTypeIDs.length>0 || this.structureType.deletedWorkTypeItemIDs>0) ) {
+          this.$confirm('While updating do you want to delete items?', 'Warning', {
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancel Update',
+            type: 'warning',
+            center: true
+          }).then(() => {
+            this.saveStructureType();
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: 'Delete canceled'
+            });
+          });
+      } else {
+          this.saveStructureType();
+          console.log('handleSubmit:', this.structureType);        
+      }
+    },
+    saveStructureType(){
       if (this.structureType.id !== undefined) {
         this.structureType.status = 'active';
         axios

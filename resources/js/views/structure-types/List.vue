@@ -84,7 +84,7 @@
             type="danger"
             size="small"
             icon="el-icon-delete"
-            @click="handleDelete(scope.row.id, scope.row.full_name);"
+            @click="handleDelete(scope.row.id, scope.row.name);"
           >
             Delete
           </el-button>
@@ -153,7 +153,7 @@ export default {
       this.getList();
     },
     handleDelete(id, name) {
-      this.$confirm('This will permanently delete structureType ' + name + '. Continue?', 'Warning', {
+      this.$confirm('This will permanently delete Structure Type ' + name + '. Continue?', 'Warning', {
         confirmButtonText: 'OK',
         cancelButtonText: 'Cancel',
         type: 'warning',
@@ -177,8 +177,8 @@ export default {
     handleDownload() {
       this.downloading = true;
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['SL', 'StructureType ID', 'Name', 'Code', 'Description', 'Start Date', 'End Date'];
-        const filterVal = ['index', 'id', 'full_name', 'code', 'description', 'start_date', 'end_date'];
+        const tHeader = ['SL', 'StructureType ID', 'Name', 'Description', 'Element Name'];
+        const filterVal = ['index', 'id', 'name', 'description', 'element_name'];
         const data = this.formatJson(filterVal, this.list);
         excel.export_json_to_excel({
           header: tHeader,

@@ -47,10 +47,10 @@ module.exports = {
       'beforeColon': false,
       'afterColon': true
     }],
-    'keyword-spacing': [2, {
-      'before': true,
-      'after': true
-    }],
+    // 'keyword-spacing': [2, {
+    //   'before': true,
+    //   'after': true
+    // }],
     'new-cap': [2, {
       'newIsCap': true,
       'capIsNew': false
@@ -125,7 +125,7 @@ module.exports = {
       'after': true
     }],
     'space-before-function-paren': [2, 'never'],
-    'space-in-parens': [2, 'never'],
+    // 'space-in-parens': [2, 'never'],
     // 'space-infix-ops': 2,
     'space-unary-ops': [2, {
       'words': true,

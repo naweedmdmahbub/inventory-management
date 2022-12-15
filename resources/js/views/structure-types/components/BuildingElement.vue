@@ -1,9 +1,9 @@
 <template>
-    <div class="box">
+    <div class="box-element">
       <el-row :gutter="5">
           <el-col :span="15" :offset="1">
               <el-form-item :label="$t('common.description')" prop="description">
-                  <el-input v-model="workTypeItem.description" type="textarea" :placeholder="$t('common.description')" />
+                  <el-input v-model="workTypeItem.description" type="textarea" :placeholder="$t('common.description')" :disabled="mode === 'view'" />
               </el-form-item>
           </el-col>
           <el-col :span="7" :offset="1">
@@ -21,17 +21,17 @@
       <el-row :gutter="5">
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.length')" prop="length">
-                  <el-input v-model="workTypeItem.length" :placeholder="$t('work.length')" @change="calculateQuantity" />
+                  <el-input v-model="workTypeItem.length" :placeholder="$t('work.length')" :disabled="mode === 'view'" @change="calculateQuantity" />
               </el-form-item>
           </el-col>
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.breadth')" prop="breadth">
-                  <el-input v-model="workTypeItem.breadth" :placeholder="$t('work.breadth')" @change="calculateQuantity" />
+                  <el-input v-model="workTypeItem.breadth" :placeholder="$t('work.breadth')" :disabled="mode === 'view'" @change="calculateQuantity" />
               </el-form-item>
           </el-col>
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.height')" prop="height">
-                  <el-input v-model="workTypeItem.height" :placeholder="$t('work.height')" @change="calculateQuantity" />
+                  <el-input v-model="workTypeItem.height" :placeholder="$t('work.height')" :disabled="mode === 'view'" @change="calculateQuantity" />
               </el-form-item>
           </el-col>
       </el-row>
@@ -40,7 +40,7 @@
       <el-row :gutter="5">
           <el-col :span="7" :offset="1">
               <el-form-item :label="$t('work.nos')" prop="nos">
-                  <el-input v-model="workTypeItem.nos" :placeholder="$t('work.nos')" @change="calculateQuantity" />
+                  <el-input v-model="workTypeItem.nos" :placeholder="$t('work.nos')" :disabled="mode === 'view'" @change="calculateQuantity" />
               </el-form-item>
           </el-col>
           <el-col :span="7" :offset="1">
@@ -50,7 +50,7 @@
           </el-col>
           <el-col :span="7" :offset="1">
               <el-form-item>
-                <el-button type="danger" @click.prevent="removeBuildingElement(workTypeItem)">Delete</el-button>
+                <el-button v-if="mode !== 'view'" type="danger" @click.prevent="removeBuildingElement(workTypeItem)">Delete</el-button>
               </el-form-item>
           </el-col>
       </el-row>
@@ -85,7 +85,8 @@ export default {
     },
     removeBuildingElement(item) {
       var index = this.workType.workTypeItems.indexOf(item);
-      console.log('removeBuildingElement: ', this.workType, item, index);
+      console.log('removeBuildingElement: ', this.workType, item, item.id, index, this.structureType.deletedWorkTypeItemIDs);
+      this.structureType.deletedWorkTypeItemIDs.push(item.id);
       this.workType.workTypeItems.splice(index, 1);
     },
   }
@@ -93,9 +94,9 @@ export default {
 </script>
 
 <style scoped>
-  .box {
+  .box-element {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    border: .2px solid;
+    border: .2px solid aqua;
     padding: 2px;
     margin: 2px;
   }
