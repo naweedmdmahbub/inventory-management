@@ -50,18 +50,7 @@ class StructureTypeController extends Controller
             $structureType = StructureType::create($input);
             foreach($request->workTypes as $workTypeInput){
                 // dd($workTypeInput);
-                $workType = new WorkType();
-                $workType->name = $workTypeInput['name'];
-                $workType->total = isset($workTypeInput['total']) ? $workTypeInput['total'] :null;
-                $workType->structure_type_id = $structureType->id;
-                $workType->save();
-
-                foreach($workTypeInput['workTypeItems'] as $workTypeItemInput){
-                    $workTypeItem = new WorkTypeItem();
-                    $workTypeItem->work_type_id = $workType->id;
-                    $this->saveWorkTypeItem($workTypeItem, $workTypeItemInput);
-                    // dd($workTypeItem);
-                }
+                $this->saveWorkType($workTypeInput, $structureType);
             }
             DB::commit();
             return new StructureTypeResource($structureType);
@@ -108,16 +97,7 @@ class StructureTypeController extends Controller
 
             foreach($request->workTypes as $workTypeInput){
                 // dd($workTypeInput);
-                $workType = isset($workTypeInput['id']) ? WorkType::find($workTypeInput['id']) : new WorkType();
-                $workType->name = $workTypeInput['name'];
-                $workType->total = isset($workTypeInput['total']) ? $workTypeInput['total'] :null;
-                $workType->structure_type_id = $structureType->id;
-                $workType->save();
-                foreach($workTypeInput['workTypeItems'] as $workTypeItemInput){
-                    $workTypeItem = isset($workTypeItemInput['id']) ? WorkTypeItem::find($workTypeItemInput['id']) : new WorkTypeItem();
-                    $workTypeItem->work_type_id = $workType->id;
-                    $this->saveWorkTypeItem($workTypeItem, $workTypeItemInput);
-                }
+                $this->saveWorkType($workTypeInput, $structureType);
             }
             DB::commit();
             return new StructureTypeResource($structureType);
@@ -136,11 +116,7 @@ class StructureTypeController extends Controller
     public function destroy($id)
     {
         try {
-            $structureType = StructureType::with('workTypes.workTypeItems')->find($id);
-            foreach($structureType->workTypes as $workType){
-                $workType->workTypeItems()->delete();
-                $workType->delete();
-            }
+            $structureType = StructureType::find($id);
             $structureType->delete();
             return response()->json(null, 204);
         } catch (\Exception $ex) {
@@ -149,6 +125,19 @@ class StructureTypeController extends Controller
     }
 
 
+    public function saveWorkType($workTypeInput, $structureType)
+    {        
+        $workType = isset($workTypeInput['id']) ? WorkType::find($workTypeInput['id']) : new WorkType();
+        $workType->name = $workTypeInput['name'];
+        $workType->total = isset($workTypeInput['total']) ? $workTypeInput['total'] :null;
+        $workType->structure_type_id = $structureType->id;
+        $workType->save();
+        foreach($workTypeInput['workTypeItems'] as $workTypeItemInput){
+            $workTypeItem = isset($workTypeItemInput['id']) ? WorkTypeItem::find($workTypeItemInput['id']) : new WorkTypeItem();
+            $workTypeItem->work_type_id = $workType->id;
+            $this->saveWorkTypeItem($workTypeItem, $workTypeItemInput);
+        }
+    }
 
     public function saveWorkTypeItem($workTypeItem, $input)
     {

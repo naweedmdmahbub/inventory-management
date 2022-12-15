@@ -45,6 +45,7 @@ class CreateWorkTypeItemsTable extends Migration
             $table->float('laping')->nullable();
             $table->float('actual_length')->nullable();
             $table->text('remarks')->nullable();
+            $table->foreign('work_type_id')->references('id')->on('work_types')->onDelete('cascade');
             $table->timestamps();
         });
     }

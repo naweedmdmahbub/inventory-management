@@ -18,6 +18,7 @@ class CreateWorkTypesTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('structure_type_id');
             $table->float('total')->nullable();
+            $table->foreign('structure_type_id')->references('id')->on('structure_types')->onDelete('cascade');
             $table->timestamps();
         });
     }
