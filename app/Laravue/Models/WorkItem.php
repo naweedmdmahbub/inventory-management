@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class WorkTypeItem extends Model
+class WorkItem extends Model
 {
     use HasFactory, LogsActivity;
     protected $guard_name = 'api';
@@ -16,8 +16,8 @@ class WorkTypeItem extends Model
                             'pile', 'pile_dia', 'bar_dia', 'rebar_num', 'laping', 'actual_length', 'remarks'
                         ];
 
-    public function workType(){
-        return $this->belongsTo(WorkType::class);
+    public function work(){
+        return $this->belongsTo(Work::class);
     }
     // public function elementType(){
     //     return $this->belongsTo(ElementType::class);
@@ -32,7 +32,7 @@ class WorkTypeItem extends Model
     protected static $logOnlyDirty = true;
     public function getDescriptionForEvent(string $eventName): string
     {
-        return "WorkTypeItem has been {$eventName}";
+        return "WorkItem has been {$eventName}";
     }
     // Activity Logs ends
 }

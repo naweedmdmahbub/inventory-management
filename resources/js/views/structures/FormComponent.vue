@@ -50,7 +50,7 @@ import WorkTypeComponent from './components/WorkTypeComponent';
 import axios from 'axios';
 import { showErrors } from '@/utils/helper.js'
 export default {
-  name: 'StructureTypeForm',
+  name: 'StructureForm',
   components: { WorkTypeComponent },
   props: ['structure', 'mode'],
   data() {
@@ -156,7 +156,7 @@ export default {
             type: 'warning',
             center: true
           }).then(() => {
-            this.saveStructureType();
+            this.saveStructure();
           }).catch(() => {
             this.$message({
               type: 'info',
@@ -164,11 +164,11 @@ export default {
             });
           });
       } else {
-          this.saveStructureType();
+          this.saveStructure();
           console.log('handleSubmit:', this.structure);        
       }
     },
-    saveStructureType(){
+    saveStructure(){
       if (this.structure.id !== undefined) {
         this.structure.status = 'active';
         axios
@@ -177,7 +177,7 @@ export default {
             this.$router.push('/project/structures');
             this.$message({
               type: 'success',
-              message: 'StructureType info has been updated successfully',
+              message: 'Structure info has been updated successfully',
               duration: 5 * 1000,
             });
           })

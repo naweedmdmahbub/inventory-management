@@ -52,6 +52,7 @@ Route::namespace('Api')->group(function() {
         // Project routes
         Route::apiResource('projects', 'ProjectController');
         Route::apiResource('structureTypes', 'StructureTypeController');
+        Route::apiResource('structures', 'StructureController');
 
         Route::post('get-model-data/', 'SuperDashboardController@getModelData');
     });

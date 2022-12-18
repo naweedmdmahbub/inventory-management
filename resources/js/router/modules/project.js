@@ -45,29 +45,29 @@ const projectRoutes = {
     {
       path: 'structure-types/view/:id',
       component: () => import('@/views/structure-types/View'),
-      name: 'ViewStructure',
-      meta: { title: 'viewStructure', noCache: true, permissions: ['manage structure type'] },
+      name: 'ViewStructureType',
+      meta: { title: 'viewStructureType', noCache: true, permissions: ['manage structure type'] },
       hidden: true,
     },
     {
       path: 'structure-types/edit/:id',
       component: () => import('@/views/structure-types/Edit'),
-      name: 'EditStructure',
-      meta: { title: 'editStructure', noCache: true, permissions: ['manage structure type'] },
+      name: 'EditStructureType',
+      meta: { title: 'editStructureType', noCache: true, permissions: ['manage structure type'] },
       hidden: true,
     },
     {
       path: 'structure-types/create',
       component: () => import('@/views/structure-types/Create'),
-      name: 'CreateStructure',
-      meta: { title: 'createStructure', noCache: true, permissions: ['manage structure type'] },
+      name: 'CreateStructureType',
+      meta: { title: 'createStructureType', noCache: true, permissions: ['manage structure type'] },
       hidden: true,
     },
     {
       path: 'structure-types',
       component: () => import('@/views/structure-types/List'),
-      name: 'StructureList',
-      meta: { title: 'structures', noCache: true, icon: 'list', permissions: ['manage structure type'] },
+      name: 'StructureTypeList',
+      meta: { title: 'structureTypes', noCache: true, icon: 'list', permissions: ['manage structure type'] },
     },
 
     

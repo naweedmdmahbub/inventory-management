@@ -112,7 +112,7 @@ import checkPermission from '@/utils/permission'; // Permission checking
 const structureResource = new Resource('structures');
 
 export default {
-  name: 'StructureTypeList',
+  name: 'StructureList',
   components: { Pagination },
   directives: { waves, permission },
   data() {
@@ -126,7 +126,7 @@ export default {
         limit: 15,
         keyword: '',
       },
-      newStructureType: {},
+      newStructure: {},
     };
   },
   computed: {},
@@ -137,10 +137,12 @@ export default {
   methods: {
     checkPermission,
     async getList() {
+    console.log('getList list');
       const { limit, page } = this.query;
       this.loading = true;
       const { data, meta } = await structureResource.list(this.query);
       this.list = data;
+    console.log('list');
       this.list.forEach((element, index) => {
         element['index'] = (page - 1) * limit + index + 1;
       });
@@ -177,7 +179,7 @@ export default {
     handleDownload() {
       this.downloading = true;
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['SL', 'StructureType ID', 'Name', 'Description', 'Element Name'];
+        const tHeader = ['SL', 'Structure ID', 'Name', 'Description', 'Element Name'];
         const filterVal = ['index', 'id', 'name', 'description', 'element_name'];
         const data = this.formatJson(filterVal, this.list);
         excel.export_json_to_excel({

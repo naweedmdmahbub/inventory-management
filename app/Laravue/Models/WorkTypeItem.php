@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class WorkItem extends Model
+class WorkTypeItem extends Model
 {
     use HasFactory, LogsActivity;
     protected $guard_name = 'api';
@@ -16,8 +16,8 @@ class WorkItem extends Model
                             'pile', 'pile_dia', 'bar_dia', 'rebar_num', 'laping', 'actual_length', 'remarks'
                         ];
 
-    public function work(){
-        return $this->belongsTo(Work::class);
+    public function workType(){
+        return $this->belongsTo(workType::class);
     }
     // public function elementType(){
     //     return $this->belongsTo(ElementType::class);

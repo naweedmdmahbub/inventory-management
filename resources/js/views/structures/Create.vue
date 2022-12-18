@@ -7,7 +7,7 @@
 <script>
 import FormComponent from './FormComponent';
 export default {
-  name: 'CreateStructureType',
+  name: 'CreateStructure',
   components: { FormComponent },
   data() {
     return {

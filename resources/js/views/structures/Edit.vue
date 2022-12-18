@@ -8,7 +8,7 @@
 import FormComponent from './FormComponent';
 import axios from 'axios';
 export default {
-  name: 'EditStructureType',
+  name: 'EditStructure',
   components: { FormComponent },
   data() {
     return {

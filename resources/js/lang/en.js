@@ -101,6 +101,9 @@ export default {
     viewStructureType: 'View Structure Type',
 
     structures: 'Structures',
+    createStructure: 'Create Structure',
+    editStructure: 'Edit Structure',
+    viewStructure: 'View Structure',
     works: 'Works',
   },
   navbar: {
@@ -242,6 +245,8 @@ export default {
   work: {
     'workType': 'Work Type',
     'workTypeItem': 'Work Type Item',
+    'work': 'Work',
+    'workItem': 'Work Item',
     'nos': 'NOS',
     'length': 'Length',
     'breadth': 'Breadth',
