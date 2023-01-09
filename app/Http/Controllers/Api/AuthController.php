@@ -34,7 +34,11 @@ class AuthController extends BaseController
 
         $user = $request->user();
 
-        return response()->json(new JsonResponse(new UserResource($user)), Response::HTTP_OK);
+        return response()->json([
+            'message' => 'User Logged In Successfully',
+            'token' => $user->createToken("myapptoken")->plainTextToken,
+            'user' => $user
+        ], 200);
     }
 
     /**
@@ -43,6 +47,7 @@ class AuthController extends BaseController
      */
     public function logout(Request $request)
     {
+        auth()->user()->tokens()->where('tokenable_type', 'App\Laravue\Models\User')->where('tokenable_id', auth()->user()->id)->delete();
         Auth::guard('web')->logout();
         return response()->json((new JsonResponse())->success([]), Response::HTTP_OK);
     }
