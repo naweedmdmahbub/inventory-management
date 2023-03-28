@@ -101,7 +101,7 @@ export default {
         workTypeItems: [{
           work_type_id: null,
           element_type_id: 2,
-          // name: '',
+          // name: '', 
           description: '',
 
           dia: 10,
